@@ -1,8 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Code, Drill, Layers } from "lucide-react";
-import { ProgressBar } from "@/components/ui/progress-bar";
-import { skillCategories, skillProficiency } from "@/data/portfolio-data";
+import { skillCategories } from "@/data/portfolio-data";
 
 // Add icons to skill categories
 const skillCategoriesWithIcons = skillCategories.map((category, index) => {
@@ -49,17 +48,7 @@ export default function SkillsSection() {
           ))}
         </div>
 
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold mb-6 text-center text-white">Additional Skills & Interests</h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {skillProficiency.map((skill, index) => (
-              <div key={index} className="bg-gray-700 p-4 rounded-lg hover:bg-gray-650 transition-colors">
-                <span className="text-white font-medium block text-center">{skill.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   );

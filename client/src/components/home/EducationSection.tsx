@@ -33,28 +33,7 @@ export default function EducationSection() {
           ))}
         </Timeline>
         
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold mb-6 text-center">Relevant Coursework</h3>
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="coursework">
-                <AccordionTrigger className="px-6 py-4 hover:bg-gray-50 text-left font-medium">
-                  View Completed Courses
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                    {coursework.map((course, index) => (
-                      <div key={index} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        <span>{course}</span>
-                      </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </div>
+
       </div>
     </section>
   );

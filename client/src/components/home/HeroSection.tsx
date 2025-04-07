@@ -61,9 +61,9 @@ export default function HeroSection() {
           
           <div className="w-full md:w-2/3">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              <span className="text-primary">Hi, I'm Abhijit Kar</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-300">Hi, I'm Abhijit Kar</span>
             </h1>
-            <h2 className="text-xl md:text-2xl text-white mb-6">Computer Science Engineering Student</h2>
+            <h2 className="text-xl md:text-2xl text-white mb-6 font-medium">Computer Science Engineering Student</h2>
             <p className="text-gray-300 mb-8 leading-relaxed text-lg">
               Passionate about technology and problem-solving. Currently pursuing Bachelor of Technology in Computer Science and Engineering at National Institute of Technology Karnataka. My interests include machine learning, software development, and data structures & algorithms.
             </p>
