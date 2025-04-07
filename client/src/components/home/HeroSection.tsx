@@ -14,10 +14,10 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="about" className="section-animate py-16 md:py-24 opacity-0 translate-y-4 transition-all duration-500">
+    <section id="about" className="section-animate py-16 md:py-24 opacity-0 translate-y-4 transition-all duration-500 animated-bg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <div className="w-full md:w-1/3 flex justify-center">
+          <div className="w-full md:w-1/3 flex justify-center parallax">
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-primary shadow-lg">
               {/* SVG Placeholder for profile image */}
               <svg 

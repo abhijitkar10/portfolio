@@ -66,7 +66,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-animate py-16 bg-gray-50 opacity-0 translate-y-4 transition-all duration-500">
+    <section id="contact" className="section-animate py-16 bg-gray-800 opacity-0 translate-y-4 transition-all duration-500">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center mb-12">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Get In Touch</span>

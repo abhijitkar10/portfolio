@@ -9,8 +9,21 @@ function App() {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.1,
+      threshold: 0.15,
     };
+    
+    // Parallax scrolling effect
+    const handleParallaxScroll = () => {
+      const elements = document.querySelectorAll('.parallax');
+      elements.forEach((element) => {
+        const scrollY = window.scrollY;
+        const speed = 0.05;
+        const yPos = -(scrollY * speed);
+        element.setAttribute('style', `transform: translateY(${yPos}px)`);
+      });
+    };
+    
+    window.addEventListener('scroll', handleParallaxScroll);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -29,6 +42,7 @@ function App() {
       sections.forEach((section) => {
         observer.unobserve(section);
       });
+      window.removeEventListener('scroll', handleParallaxScroll);
     };
   }, []);
 

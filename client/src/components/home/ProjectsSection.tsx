@@ -2,42 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const projects = [
-  {
-    title: "Numerical Image Recognition",
-    period: "January 2025",
-    technologies: ["Python", "PyTorch", "Google Colab"],
-    points: [
-      "Developed an image recognition model to classify handwritten digits using a neural network.",
-      "Implemented Python and PyTorch in Google Colab to train and evaluate the model.",
-      "Achieved high accuracy in digit classification through optimized model training."
-    ],
-    gradient: "from-primary to-secondary"
-  },
-  {
-    title: "Runner's Performance Monitoring System",
-    period: "September 2024 – November 2024",
-    technologies: ["Verilog", "Logisim"],
-    points: [
-      "Designed a system to track key metrics such as steps taken, distance traveled, max heart rate, and average heart rate.",
-      "Implemented Verilog-based software and developed circuit diagrams in Logisim.",
-      "Integrated safety alert mechanisms to enhance performance tracking."
-    ],
-    gradient: "from-secondary to-primary"
-  },
-  {
-    title: "Go Back-N ARQ",
-    period: "Ongoing",
-    technologies: ["Python", "Scapy", "Matplotlib"],
-    points: [
-      "Built a tool to emulate the working of Go Back-N ARQ protocol.",
-      "Implemented Graphs to show the results in different cases.",
-      "Used Scapy as a packet manipulation library."
-    ],
-    gradient: "from-accent to-secondary"
-  }
-];
+import { projects } from "@/data/portfolio-data";
 
 // Badge color mapping
 const badgeColors: Record<string, string> = {
@@ -52,7 +17,7 @@ const badgeColors: Record<string, string> = {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="section-animate py-16 opacity-0 translate-y-4 transition-all duration-500">
+    <section id="projects" className="section-animate py-16 opacity-0 translate-y-4 transition-all duration-500 bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center mb-12">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Projects</span>
@@ -89,14 +54,20 @@ export default function ProjectsSection() {
                   ))}
                 </ul>
                 <div className="mt-6 flex justify-end">
-                  <Button 
-                    variant="ghost" 
-                    className="text-primary hover:text-primary/80 font-medium flex items-center"
-                    aria-label="View details"
+                  <a 
+                    href="https://github.com/abhijitkar10" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                   >
-                    <span>View Details</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
+                    <Button 
+                      variant="ghost" 
+                      className="text-primary hover:text-primary/80 font-medium flex items-center"
+                      aria-label="View details on GitHub"
+                    >
+                      <span>View on GitHub</span>
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>

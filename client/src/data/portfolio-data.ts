@@ -108,11 +108,23 @@ export const certifications = [
     title: "Machine Learning: Classification and Regression",
     issuer: "Stanford via Coursera",
     date: "January 2025",
+    certificateUrl: "https://www.coursera.org/account/accomplishments/certificate/CYMKFMC89F9O",
     details: [
       "Completed multiple lab assignments focused on machine learning and data analysis.",
       "Used Python libraries like NumPy, Matplotlib, and PyPlot for data visualization and numerical computations.",
       "Implemented classification, regression, and clustering models using Scikit-learn.",
       "Gained hands-on experience in feature engineering, model evaluation, and performance tuning."
+    ]
+  },
+  {
+    title: "Mathematics For Economics - I",
+    issuer: "NPTEL",
+    date: "2024",
+    certificateUrl: "https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/109/noc24hs152/Course/NPTEL24HS152S85520044603891363.pdf",
+    details: [
+      "Completed comprehensive course on mathematical concepts applied to economics.",
+      "Studied advanced mathematical techniques for economic analysis.",
+      "Gained proficiency in applying mathematical principles to economic models."
     ]
   }
 ];
