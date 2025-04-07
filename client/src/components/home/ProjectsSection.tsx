@@ -41,13 +41,13 @@ const projects = [
 
 // Badge color mapping
 const badgeColors: Record<string, string> = {
-  "Python": "bg-blue-100 text-blue-800",
-  "PyTorch": "bg-purple-100 text-purple-800",
-  "Google Colab": "bg-green-100 text-green-800",
-  "Verilog": "bg-yellow-100 text-yellow-800",
-  "Logisim": "bg-indigo-100 text-indigo-800",
-  "Scapy": "bg-red-100 text-red-800",
-  "Matplotlib": "bg-orange-100 text-orange-800"
+  "Python": "bg-blue-900 text-blue-200",
+  "PyTorch": "bg-purple-900 text-purple-200",
+  "Google Colab": "bg-green-900 text-green-200",
+  "Verilog": "bg-yellow-900 text-yellow-200",
+  "Logisim": "bg-indigo-900 text-indigo-200",
+  "Scapy": "bg-red-900 text-red-200",
+  "Matplotlib": "bg-orange-900 text-orange-200"
 };
 
 export default function ProjectsSection() {
@@ -80,11 +80,11 @@ export default function ProjectsSection() {
                     </Badge>
                   ))}
                 </div>
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-3 text-gray-300">
                   {project.points.map((point, pointIndex) => (
                     <li key={pointIndex} className="flex items-start">
-                      <Check className="w-4 h-4 text-primary mr-2 mt-1" />
-                      <span>{point}</span>
+                      <Check className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
+                      <span className="text-base">{point}</span>
                     </li>
                   ))}
                 </ul>

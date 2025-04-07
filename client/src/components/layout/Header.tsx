@@ -47,7 +47,7 @@ export default function Header() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-white/80"}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-md shadow-md" : "bg-gray-900/80"}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <a 
@@ -56,7 +56,7 @@ export default function Header() {
               e.preventDefault();
               scrollToSection("#about");
             }}
-            className="text-xl font-bold text-primary"
+            className="text-2xl font-bold text-primary tracking-tight"
           >
             Abhijit Kar
           </a>
@@ -71,7 +71,7 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
-                className="relative nav-link text-gray-700 hover:text-primary font-medium transition-colors after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+                className="relative nav-link text-white hover:text-primary font-medium transition-colors text-lg after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
               >
                 {link.name}
               </a>
@@ -93,11 +93,11 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 py-2 transition-all duration-300 ease-in-out transform ${
+        className={`md:hidden absolute top-full left-0 right-0 bg-gray-900 border-t border-gray-800 py-3 transition-all duration-300 ease-in-out transform ${
           mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col space-y-3">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -106,7 +106,7 @@ export default function Header() {
                 e.preventDefault();
                 scrollToSection(link.href);
               }}
-              className="text-gray-700 py-2 hover:text-primary font-medium transition-colors"
+              className="text-white py-2 hover:text-primary font-medium transition-colors text-lg"
             >
               {link.name}
             </a>

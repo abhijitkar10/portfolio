@@ -63,44 +63,44 @@ export default function HeroSection() {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               <span className="text-primary">Hi, I'm Abhijit Kar</span>
             </h1>
-            <h2 className="text-xl md:text-2xl text-gray-700 mb-6">Computer Science Engineering Student</h2>
-            <p className="text-gray-600 mb-8 leading-relaxed">
+            <h2 className="text-xl md:text-2xl text-white mb-6">Computer Science Engineering Student</h2>
+            <p className="text-gray-300 mb-8 leading-relaxed text-lg">
               Passionate about technology and problem-solving. Currently pursuing Bachelor of Technology in Computer Science and Engineering at National Institute of Technology Karnataka. My interests include machine learning, software development, and data structures & algorithms.
             </p>
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="flex flex-col space-y-4 mb-8">
               <a 
                 href="mailto:abhijitkar0815@gmail.com" 
-                className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center gap-3 text-white hover:text-primary transition-colors text-xl"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-7 h-7" />
                 <span>abhijitkar0815@gmail.com</span>
               </a>
               <a 
                 href="https://linkedin.com/in/abhijit-kar-471a33214" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center gap-3 text-white hover:text-primary transition-colors text-xl font-medium"
               >
-                <Linkedin className="w-5 h-5" />
-                <span>LinkedIn</span>
+                <Linkedin className="w-7 h-7 text-[#0077b5]" />
+                <span>linkedin.com/in/abhijit-kar-471a33214</span>
               </a>
               <a 
                 href="https://github.com/abhijitkar10" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center gap-3 text-white hover:text-primary transition-colors text-xl font-medium"
               >
-                <Github className="w-5 h-5" />
-                <span>GitHub</span>
+                <Github className="w-7 h-7 text-white" />
+                <span>github.com/abhijitkar10</span>
               </a>
               <a 
                 href="https://abhijitkar.website" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center gap-3 text-white hover:text-primary transition-colors text-xl"
               >
-                <Globe className="w-5 h-5" />
-                <span>Portfolio Website</span>
+                <Globe className="w-7 h-7" />
+                <span>abhijitkar.website</span>
               </a>
             </div>
             <div className="flex flex-wrap gap-4">
