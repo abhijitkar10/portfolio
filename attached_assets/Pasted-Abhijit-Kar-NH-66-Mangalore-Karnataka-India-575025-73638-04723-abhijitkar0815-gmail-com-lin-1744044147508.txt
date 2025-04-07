@@ -1,0 +1,52 @@
+Abhijit Kar
+NH 66, Mangalore, Karnataka, India 575025
+ 73638-04723 # abhijitkar0815@gmail.com ï linkedin.com/in/abhijit-kar-471a33214 § github.com/abhijitkar10
+ abhijitkar.website
+Education
+National Institute of Technology Karnataka Aug. 2023 -
+Bachelor of Technology in Computer Science and Engineering Mangalore, Karnataka
+Global Indian International School Apr. 2022 – Mar. 2023
+CBSE Class 12 : 96.2% Kuala Lumpur,Malaysia
+Global Indian International School Apr. 2020 – Mar. 2021
+CBSE Class 10 : 93.4% Kuala Lumpur,Malaysia
+Relevant Coursework
+• Linear Algebra and
+Matrices
+• C Programming
+• Operating Sytems
+• Data Structures and
+Algorithms
+• Design and Analysis of
+Algortihms
+• Discrete Mathematical
+Structures
+• Database Management
+System
+• Data Communication
+• Theory of Computation
+• Computer Organization
+and Architecture
+Projects
+Numerical Image Recognition | Python, PyTorch, Google Colab January 2025
+• Developed an image recognition model to classify handwritten digits using a neural network.
+• Implemented Python and PyTorch in Google Colab to train and evaluate the model.
+• Achieved high accuracy in digit classification through optimized model training.
+Runner’s Performance Monitoring System | Verilog, Logisim September 2024 – November 2024
+• Designed a system to track key metrics such as steps taken, distance traveled, max heart rate, and average heart rate.
+• Implemented Verilog-based software and developed circuit diagrams in Logisim.
+• Integrated safety alert mechanisms to enhance performance tracking.
+Go Back-N ARQ | Python, Scapy, Matplotlib Ongoing
+• Built a tool to emulate the working of Go Back-N ARQ protocol.
+• Implemented Graphs to show the results in different cases.
+• UsedScapy used as a packet manipulation library.
+Technical Skills
+Languages: C, C++, Python,HTML/CSS, JavaScript, MYSQL
+Developer Tools: VS Code, Logisim, Cisco Packet Tracer,Google Cloud
+Technologies/Frameworks: Linux, GitHub, WordPress
+Certifications / Courses
+Machine Learning: Classification and Regression Jan. 2025
+Stanford via Coursera
+• Completed multiple lab assignments focused on machine learning and data analysis.
+• Used Python libraries like NumPy, Matplotlib, and PyPlot for data visualization and numerical computations.
+• Implemented classification, regression, and clustering models using Scikit-learn.
+• Gained hands-on experience in feature engineering, model evaluation, and performance tuning.
