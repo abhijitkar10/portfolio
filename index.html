@@ -1,248 +1,636 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhijit Kar - Portfolio</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Font for Coder Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #121212;
-            color: #f1f1f1;
-            font-family: 'Source Code Pro', monospace;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abhijit Kar — Data engineering, ML systems, quantitative finance</title>
+<meta name="description" content="Abhijit Kar. CS at NIT Karnataka. Data engineering at Tredence, ML research at IIIT Nagpur. Retrieval systems, MLOps pipelines, and quantitative finance.">
+<meta name="author" content="Abhijit Kar">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Abhijit Kar — Data engineering, ML systems, quantitative finance">
+<meta property="og:description" content="CS at NIT Karnataka. Retrieval systems, MLOps pipelines, and quantitative finance — with the numbers to back them.">
+<meta property="og:url" content="https://abhijitkar10.github.io/portfolio/">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2314130F'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23FBFAF7' text-anchor='middle'%3Eak%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF7;
+  --paper-2:#F3F0E9;
+  --ink:#14130F;
+  --ink-2:#57534A;
+  --ink-3:#8B857A;
+  --rule:#DFDACE;
+  --accent:#C1402A;
+  --accent-wash:#F8EFEA;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --pad:clamp(1.25rem,5vw,4.5rem);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(15px,1.02vw,16.5px);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"kern","liga";
+  /* ruled-paper ground: two hairline gradients, near-invisible */
+  background-image:
+    repeating-linear-gradient(to bottom,transparent 0 31px,rgba(20,19,15,.028) 31px 32px),
+    repeating-linear-gradient(to right,transparent 0 31px,rgba(20,19,15,.016) 31px 32px);
+}
+::selection{background:var(--accent);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+img,svg{display:block;max-width:100%}
 
-        .navbar {
-            background-color: #1f1f1f;
-        }
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.mono{font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:500}
+.dim{color:var(--ink-3)}
+.rule{height:1px;background:var(--rule);border:0}
 
-        .navbar a {
-            color: #f1f1f1;
-        }
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--paper) 93%,transparent);
+  backdrop-filter:saturate(150%) blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.bar .wrap{display:flex;align-items:center;gap:1.5rem;height:52px}
+.bar nav{margin-left:auto;display:flex;gap:1.35rem;flex-wrap:wrap}
+.bar nav a{color:var(--ink-2);transition:color .18s}
+.bar nav a:hover{color:var(--accent)}
+.brand{font-family:var(--serif);font-size:1.22rem;letter-spacing:.01em}
+@media(max-width:640px){.bar nav a:nth-child(n+4){display:none}}
 
-        .navbar a:hover {
-            color: #00bcd4;
-        }
+/* ---------- masthead ---------- */
+.mast{padding:clamp(3.5rem,9vw,7.5rem) 0 clamp(2.5rem,5vw,4rem)}
+.eyebrow{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;color:var(--ink-3);margin-bottom:clamp(1.5rem,4vw,2.75rem)}
+.eyebrow span:not(:last-child)::after{content:"／";margin-left:.75rem;color:var(--rule)}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(3.1rem,11.5vw,8.6rem);
+  line-height:.9;letter-spacing:-.022em;
+  text-wrap:balance;
+}
+h1 em{font-style:italic;color:var(--accent)}
+.mast-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.75rem,4vw,3rem);margin-top:clamp(1.75rem,4vw,2.75rem)}
+@media(min-width:860px){.mast-grid{grid-template-columns:minmax(0,1fr) minmax(0,21rem);align-items:end;gap:4rem}}
+.lede{font-size:clamp(1.05rem,1.5vw,1.24rem);color:var(--ink-2);max-width:46ch;line-height:1.55}
+.lede strong{color:var(--ink);font-weight:500}
+.side{border-top:1px solid var(--rule);padding-top:1.1rem}
+.status{display:flex;align-items:center;gap:.55rem;margin-bottom:1rem}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;position:relative}
+.dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);opacity:.35;animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.55}100%{transform:scale(1.5);opacity:0}}
+.links{display:flex;flex-direction:column;gap:.1rem}
+.links a{display:flex;align-items:center;gap:.7rem;padding:.5rem 0;border-bottom:1px solid var(--rule);transition:padding-left .2s,color .2s}
+.links a:last-child{border-bottom:0}
+.links a:hover{padding-left:.45rem;color:var(--accent)}
+.links a svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none;opacity:.75}
+.links .arw{margin-left:auto;opacity:0;transition:opacity .2s}
+.links a:hover .arw{opacity:1}
 
-        .jumbotron {
-            background-color: #333;
-            color: #fff;
-        }
+/* ---------- ledger ---------- */
+.ledger{border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:clamp(1.5rem,3vw,2.25rem) 0}
+.ledger-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:clamp(1.25rem,2.5vw,2rem)}
+.stat b{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.6rem,3.4vw,2.35rem);letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:.5rem;color:var(--ink-3);font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.5}
 
-        .container {
-            padding: 50px;
-        }
+/* ---------- sections ---------- */
+section{padding:clamp(3.25rem,7vw,6rem) 0}
+#education{padding-bottom:clamp(1.25rem,2.5vw,2rem)}
+.head{display:grid;grid-template-columns:1fr;gap:.6rem;margin-bottom:clamp(1.75rem,3.5vw,2.75rem);align-items:baseline}
+@media(min-width:860px){.head{grid-template-columns:9rem 1fr}}
+.head h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1;letter-spacing:-.015em}
+.head .num{color:var(--accent)}
+.head .note{grid-column:1/-1;color:var(--ink-3);max-width:52ch;font-size:.94rem}
+@media(min-width:760px){.head .note{grid-column:2}}
 
-        .section-title {
-            text-align: center;
-            color: #00bcd4;
-            margin-bottom: 30px;
-        }
+/* ---------- work ---------- */
+.entry{border-top:1px solid var(--rule);padding:clamp(1.6rem,3vw,2.4rem) 0}
+.entry:last-of-type{border-bottom:1px solid var(--rule)}
+.entry-top{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:760px){.entry-top{grid-template-columns:6.5rem minmax(0,1fr) auto;gap:1.5rem}}
+.idx{font-family:var(--mono);font-size:.72rem;color:var(--ink-3);letter-spacing:.1em;padding-top:.5rem}
+h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.1vw,2.15rem);line-height:1.06;letter-spacing:-.012em}
+h3 a{background-image:linear-gradient(var(--accent),var(--accent));background-size:0 1px;background-repeat:no-repeat;background-position:0 92%;transition:background-size .28s ease,color .2s}
+h3 a:hover{background-size:100% 1px;color:var(--accent)}
+.desc{color:var(--ink-2);margin-top:.85rem;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;padding:.2rem .5rem;border:1px solid var(--rule);border-radius:3px;color:var(--ink-2);background:var(--paper)}
+.when{font-family:var(--mono);font-size:.68rem;letter-spacing:.09em;color:var(--ink-3);text-transform:uppercase;white-space:nowrap;padding-top:.55rem}
 
-        .card-body {
-            background-color: #222;
-            color: #fff;
-        }
+/* finding block — the signature element */
+.finding{
+  margin-top:1.4rem;padding:.95rem 1.1rem;
+  background:var(--accent-wash);
+  border-left:2px solid var(--accent);
+  border-radius:0 4px 4px 0;
+  max-width:66ch;
+}
+.finding p{font-size:.95rem;line-height:1.6;color:#4A2318}
+.finding .tag{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;font-weight:500}
+.finding code{font-family:var(--mono);font-size:.86em;background:rgba(193,64,42,.1);padding:.05em .3em;border-radius:2px}
 
-        .card-title {
-            color: #00bcd4;
-            cursor: pointer;
-        }
+details{margin-top:1.1rem;max-width:66ch}
+summary{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:.45rem;
+  padding:.3rem 0;transition:color .18s;
+}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-size:.95rem;line-height:1;color:var(--accent)}
+details[open] summary::before{content:"–"}
+summary:hover{color:var(--ink)}
+details ul{margin:.7rem 0 0;padding-left:1.05rem;color:var(--ink-2)}
+details li{margin-bottom:.45rem;font-size:.95rem}
+details li::marker{color:var(--accent)}
 
-        .project-details {
-            display: none;
-            margin-top: 15px;
-        }
+/* ---------- experience ---------- */
+.job{display:grid;grid-template-columns:1fr;gap:.9rem;border-top:1px solid var(--rule);padding:clamp(1.5rem,3vw,2.1rem) 0}
+.job:last-child{border-bottom:1px solid var(--rule)}
+@media(min-width:760px){.job{grid-template-columns:6.5rem minmax(0,1fr) auto;gap:1.5rem}}
+.job h3{font-size:clamp(1.3rem,2.5vw,1.75rem)}
+.job .role{font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-top:.35rem}
+.job ul{margin:.9rem 0 0;padding-left:1.05rem;color:var(--ink-2);max-width:64ch}
+.job li{margin-bottom:.5rem}
+.job li::marker{color:var(--ink-3)}
 
-        footer {
-            background-color: #1f1f1f;
-            color: #f1f1f1;
-            padding: 20px;
-            text-align: center;
-        }
-    </style>
+/* ---------- toolkit ---------- */
+.kit{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:760px){.kit{grid-template-columns:repeat(2,1fr);column-gap:3rem}}
+.kit>div{border-top:1px solid var(--rule);padding:1.15rem 0;min-width:0}
+.kit h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:.7rem}
+.kit p{font-size:1rem;color:var(--ink);line-height:1.8;display:flex;flex-wrap:wrap;gap:.1rem .45rem}
+.kit p span{white-space:nowrap}
+.kit p span::after{content:" ·";color:#C0B9AA}
+.kit p span:last-child::after{content:""}
+
+/* ---------- education ---------- */
+.edu{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:760px){.edu{grid-template-columns:repeat(2,1fr);column-gap:3.5rem}}
+.edu>div,.edu>a{border-top:1px solid var(--rule);padding:1.15rem 0;display:flex;gap:1rem;align-items:baseline;justify-content:space-between}
+.edu strong{font-weight:500;font-size:1rem}
+.edu em{display:block;font-style:normal;color:var(--ink-3);font-size:.9rem;margin-top:.15rem}
+.edu .yr{font-family:var(--mono);font-size:.68rem;color:var(--ink-3);white-space:nowrap;letter-spacing:.06em}
+.edu a:hover strong{color:var(--accent)}
+
+/* ---------- contact ---------- */
+.contact{border-top:1px solid var(--ink);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2rem,4vw,3rem)}
+.big-mail{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.75rem,7.2vw,5rem);
+  line-height:1;letter-spacing:-.02em;display:inline-block;
+  word-break:break-word;
+  background-image:linear-gradient(var(--accent),var(--accent));
+  background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;
+  transition:background-size .35s cubic-bezier(.2,.7,.3,1),color .25s;
+}
+.big-mail:hover{background-size:100% 2px;color:var(--accent)}
+.foot{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:flex-end;margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.1rem;border-top:1px solid var(--rule);color:var(--ink-3)}
+.colophon{max-width:44ch;font-size:.82rem;line-height:1.7}
+.colophon b{color:var(--ink-2);font-weight:500}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(14px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+@media print{.bar,.dot::after{display:none}body{background:#fff}}
+</style>
 </head>
-
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Abhijit Kar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#projects">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Abhijit Kar</a>
+    <nav class="mono">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
     </nav>
+  </div>
+</header>
 
-    <!-- Jumbotron -->
-    <div class="jumbotron text-center">
-        <h1 class="display-4">Welcome to My Portfolio</h1>
-        <p class="lead">A glimpse into my skills and projects</p>
+<main id="top">
+
+<div class="wrap">
+  <div class="mast">
+    <div class="eyebrow mono">
+      <span>Mangalore, India</span>
+      <span>NIT Karnataka</span>
+      <span>B.Tech CSE '27</span>
     </div>
 
-    <!-- About Section -->
-    <div id="about" class="container">
-        <h2 class="section-title">About Me</h2>
-        <p>Hi, I'm Abhijit Kar. I am currently pursuing my Bachelor of Technology in Computer Science and Engineering
-            from National Institute of Technology Karnataka. My passion lies in developing cutting-edge technology, and
-            I have worked on a variety of projects using languages like Python, C++, JavaScript, and more.</p>
+    <h1>I build systems<br>that can be <em>checked</em>.</h1>
+
+    <div class="mast-grid">
+      <div>
+      <p class="lede">
+        Data engineering, retrieval systems, and — increasingly — quantitative finance. I care
+        less about the demo than about the number underneath it, which is why most things here
+        ship with an eval set, a test suite, or <strong>a record of the experiments that
+        failed</strong>.
+      </p>
+      <p class="lede" style="margin-top:1.1rem">
+        The finance pull is the real one: a multi-factor equity system I built end to end,
+        price-elasticity modelling at Tredence, and economics coursework to go under it.
+      </p>
+      </div>
+
+      <div class="side">
+        <div class="status mono"><i class="dot"></i> Open to 2027 new-grad roles</div>
+        <div class="links">
+          <a href="https://github.com/abhijitkar10" rel="me noopener" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1.1-.8 1.7-.1.6-.1 1.2 0 1.8v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></svg>
+            <span>github.com/abhijitkar10</span><span class="arw mono">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/abhijit-kar-471a33214/" rel="me noopener" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>LinkedIn</span><span class="arw mono">→</span>
+          </a>
+          <a href="mailto:abhijitkar0815@gmail.com">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>abhijitkar0815@gmail.com</span><span class="arw mono">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="ledger">
+    <div class="ledger-grid">
+      <div class="stat"><b data-to="0.93" data-dec="2">0.93</b><span>recall@5<br>KYC retrieval</span></div>
+      <div class="stat"><b data-to="0.225" data-dec="3">0.225</b><span>R² after fixing<br>my own leak</span></div>
+      <div class="stat"><b data-to="83.72" data-dec="2" data-suffix="%">83.72%</b><span>ATP match<br>prediction</span></div>
+      <div class="stat"><b data-to="18763" data-dec="0" data-group="1">18,763</b><span>assertions<br>SSD firmware</span></div>
+      <div class="stat"><b data-to="0.66" data-dec="2">0.66</b><span>information ratio<br>factor backtest</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WORK ============ -->
+<section id="work"><div class="wrap">
+  <div class="head rv">
+    <div class="mono num">01 — Work</div>
+    <h2>Five things I built, and what each one taught me.</h2>
+    <p class="note">Every entry carries a <b>finding</b> — the correction, the negative result, or
+    the thing that turned out to be false. Those are the parts worth reading.</p>
+  </div>
+
+  <article class="entry rv">
+    <div class="entry-top">
+      <div class="idx mono">01</div>
+      <div>
+        <h3><a href="https://github.com/abhijitkar10/kyc-rag" target="_blank" rel="noopener">RBI KYC Compliance Assistant</a></h3>
+        <p class="desc">
+          Retrieval-augmented QA over the 107-page RBI Master Direction on KYC — 431 chunks,
+          clause-level citations, and a refusal path for questions the corpus can't answer.
+          Dense retrieval (BGE) fused with a BM25 implementation I wrote myself, reranked by a
+          cross-encoder. No LangChain, no LlamaIndex: every stage is code I can defend.
+        </p>
+        <div class="finding">
+          <span class="tag">Finding</span>
+          <p>Two of the five retrieval configurations I tested made things <em>worse</em> —
+          clause-level chunking, and the ms-marco reranker. Both are still in the repo with
+          their numbers. Recall@5 went 0.82 → 0.93 and recall@1 0.61 → 0.77 <em>because</em>
+          I kept the failures instead of quietly deleting them.</p>
+        </div>
+        <details>
+          <summary>Read the trace</summary>
+          <ul>
+            <li>50-question held-out eval set, written before the tuning started.</li>
+            <li>Reciprocal Rank Fusion over BM25 + dense, then cross-encoder rerank on the top candidates.</li>
+            <li>Citation guardrail catches hallucinated clause references; refuses out-of-corpus questions on all 6 test cases. 7 unit tests pin the behaviour.</li>
+            <li>14 amendment circulars indexed from the document's own footnotes — the thing a compliance tool needs and a demo bot skips.</li>
+            <li>Served through FastAPI behind a provider-agnostic LLM layer (Gemini or Claude). Retrieval stays under 20 ms.</li>
+          </ul>
+        </details>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">Sentence-Transformers</span>
+          <span class="chip">BM25 (hand-rolled)</span><span class="chip">FastAPI</span><span class="chip">pytest</span>
+        </div>
+      </div>
+      <div class="when">Jul 2026</div>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-top">
+      <div class="idx mono">02</div>
+      <div>
+        <h3><a href="https://github.com/abhijitkar10/customer-satisfaction-mlops" target="_blank" rel="noopener">Customer Satisfaction Prediction Pipeline</a></h3>
+        <p class="desc">
+          An end-to-end MLOps pipeline over nine relational Olist tables — ZenML for orchestration,
+          MLflow for tracking, a quality gate before anything reaches the registry, and Streamlit
+          on the front. The interesting part is not the model. It's the audit.
+        </p>
+        <div class="finding">
+          <span class="tag">Finding</span>
+          <p>My baseline scored R² 0.089 and I didn't believe it. The join had fanned out: the same
+          order sat in both train and test, inflating the score <b>3.6×</b>. Aggregating 117,329
+          order-item rows into 97,916 orders gave the honest number — <b>0.025</b>. Four
+          delivery-timing features later (17 total) it reached <b>0.225</b>, with the top three
+          features all delivery-related. Distrusting a result that flattered me is the most useful
+          thing this project taught me.</p>
+        </div>
+        <details>
+          <summary>Read the trace</summary>
+          <ul>
+            <li>Nine CSVs joined to order grain, then aggregated — the fan-out fix is the whole v1 → v2 story.</li>
+            <li>17 features, chosen deliberately rather than thrown at the model; feature importances reported.</li>
+            <li>MLflow tracks every run; a quality gate blocks registration below threshold.</li>
+            <li>Two real bugs documented in the repo rather than squashed silently.</li>
+            <li>Public repo — the README carries the v2 results <em>and</em> the grain-leakage finding.</li>
+          </ul>
+        </details>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">ZenML</span><span class="chip">MLflow</span>
+          <span class="chip">scikit-learn</span><span class="chip">Streamlit</span>
+        </div>
+      </div>
+      <div class="when">Jul – Aug 2026</div>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-top">
+      <div class="idx mono">03</div>
+      <div>
+        <h3><a href="https://github.com/abhijitkar10/minissd" target="_blank" rel="noopener">MiniSSD — SSD firmware, from scratch</a></h3>
+        <p class="desc">
+          A NAND flash chip, the firmware that manages it, and the NVMe interface a host talks to —
+          all in C, no dependencies, running on a laptop. Seven phases: flash model, page-mapped
+          FTL, garbage collection, wear levelling, NVMe front end, demand-paged mapping cache,
+          power-loss recovery.
+        </p>
+        <div class="finding">
+          <span class="tag">Finding</span>
+          <p>The contract a filesystem actually depends on is that an <em>acknowledged</em> write
+          survives — so that's what the tests pin down, not the happy path. The torture test crashes
+          the drive ten times in a row while it's full. <b>18,763 assertions</b> pass, clean under
+          both gcc and clang.</p>
+        </div>
+        <details>
+          <summary>Read the trace</summary>
+          <ul>
+            <li>Flash can't overwrite in place, so the FTL lies about addresses — and every later phase is a consequence of that lie.</li>
+            <li>Garbage collection is where write amplification comes from; the simulator reports it directly.</li>
+            <li>Wear levelling exists because phase 3 left some blocks erased far more than others — visible in the erase min/max column.</li>
+            <li>NVMe front end returns real status codes (LBA out of range, invalid opcode) and bounds-checks every DMA.</li>
+            <li>Power-loss recovery rebuilds the mapping table from flash, with periodic checkpoints.</li>
+          </ul>
+        </details>
+        <div class="chips">
+          <span class="chip">C99</span><span class="chip">Zero dependencies</span>
+          <span class="chip">NVMe</span><span class="chip">gcc + clang</span>
+        </div>
+      </div>
+      <div class="when">Aug 2026</div>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-top">
+      <div class="idx mono">04</div>
+      <div>
+        <h3><a href="https://github.com/abhijitkar10/thoth-wtsc" target="_blank" rel="noopener">thoth-wtsc — auditing an HPCA '23 result</a></h3>
+        <p class="desc">
+          A trace-driven model of the partial-updates-buffer eviction policies in <em>Thoth</em>
+          (Han, Tuck &amp; Awad, HPCA 2023), plus three policies of my own that sit between the
+          paper's two. No gem5 — the paper's decisions are pure functions of cache and buffer
+          state, so the write traffic can be modelled exactly without simulating a cycle.
+        </p>
+        <div class="finding">
+          <span class="tag">Finding</span>
+          <p>WTBC turns out to be <b>decision-equivalent to the oracle</b> — the two predicates are
+          the same. And WTSC's status bit is <b>not composable</b>: layering extra discard rules on
+          top of it silently breaks crash consistency, which <code>--verify</code> catches roughly
+          70,000 times per 2M writes. A zero-storage policy (<code>hybrid-v</code>) recovers 99.8%
+          of the gap.</p>
+        </div>
+        <details>
+          <summary>Read the trace</summary>
+          <ul>
+            <li>Seven policies compared: baseline, the paper's WTSC and WTBC, three new hybrids, and an unimplementable oracle as the lower bound.</li>
+            <li><code>make check</code> asserts the WTBC-equals-oracle identity on every workload.</li>
+            <li>A status-0 entry freeloads on the earlier status-1 entry that dirtied its block — discard the guarantor and the first is orphaned. That's the composability bug.</li>
+            <li>Written in C, single binary, reproducible from one command.</li>
+          </ul>
+        </details>
+        <div class="chips">
+          <span class="chip">C</span><span class="chip">Secure NVM</span>
+          <span class="chip">Trace-driven simulation</span><span class="chip">Paper reproduction</span>
+        </div>
+      </div>
+      <div class="when">Aug 2026</div>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-top">
+      <div class="idx mono">05</div>
+      <div>
+        <h3>Multi-Factor Equity Trading System</h3>
+        <p class="desc">
+          The institutional quant stack, rebuilt solo at laptop scale: a point-in-time tradable
+          universe, price ingestion into Delta Lake behind an audit gate, OpenFIGI identifier
+          matching, factor construction, a risk model, portfolio construction, and a backtest that
+          scores itself.
+        </p>
+        <div class="finding">
+          <span class="tag">Finding</span>
+          <p>Survivorship bias is the easiest way to fake a good backtest, so the universe is
+          point-in-time and there's a command whose only job is to prove it
+          (<code>qmf point-in-time TWTR</code>). The honest result: <b>IR 0.66</b>, 5.65% net
+          annualised, 2018 → 2026, 41 names. 49 tests, 9 dependencies.</p>
+        </div>
+        <details>
+          <summary>Read the trace</summary>
+          <ul>
+            <li>Every stage is a CLI verb — universe, ingest, match, factors, backtest — so any step can be re-run and inspected on its own.</li>
+            <li>Delta Lake tables are versioned; <code>qmf status</code> prints version and row count for each.</li>
+            <li>The audit gate rejects an ingest that fails its data-quality checks rather than writing bad prices.</li>
+            <li>Private repo — happy to walk through it live.</li>
+          </ul>
+        </details>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">Delta Lake</span>
+          <span class="chip">pandas</span><span class="chip">uv</span><span class="chip">Private repo</span>
+        </div>
+      </div>
+      <div class="when">2026</div>
+    </div>
+  </article>
+</div></section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience"><div class="wrap">
+  <div class="head rv">
+    <div class="mono num">02 — Experience</div>
+    <h2>Where the work was paid for.</h2>
+  </div>
+
+  <div class="job rv">
+    <div class="idx mono">01</div>
+    <div>
+      <h3>Tredence Inc.</h3>
+      <div class="role">Data Engineering Intern · Bengaluru</div>
+      <ul>
+        <li>Built a regression model that separates baseline sales from promotional noise, then used it to compute own-price elasticities across SKUs — the input a pricing decision actually needs.</li>
+        <li>Automated EDA and reporting into a pipeline that surfaces the questions worth asking from raw retail data, and generates the stakeholder deck at the end of it.</li>
+      </ul>
+    </div>
+    <div class="when">May – Jul 2026</div>
+  </div>
+
+  <div class="job rv">
+    <div class="idx mono">02</div>
+    <div>
+      <h3>IIIT Nagpur</h3>
+      <div class="role">Research Intern · Nagpur</div>
+      <ul>
+        <li>Built an ML pipeline predicting ATP tennis match outcomes from dynamic ELO / WELO ratings and 25+ engineered features.</li>
+        <li>Combined XGBoost, LightGBM and gradient boosting into an ensemble reaching 83.72% accuracy and 0.93 AUC, with SHAP explaining individual match predictions.</li>
+      </ul>
+    </div>
+    <div class="when">May – Aug 2025</div>
+  </div>
+</div></section>
+
+<!-- ============ TOOLKIT ============ -->
+<section id="toolkit"><div class="wrap">
+  <div class="head rv">
+    <div class="mono num">03 — Toolkit</div>
+    <h2>What I reach for.</h2>
+    <p class="note">No proficiency bars. A percentage next to a language name is a number nobody
+    can source, and I'd rather you judged the work above.</p>
+  </div>
+  <div class="kit rv">
+    <div>
+      <h4>Languages</h4>
+      <p><span>Python</span><span>C</span><span>C++</span><span>SQL</span><span>JavaScript</span><span>HTML/CSS</span></p>
+    </div>
+    <div>
+      <h4>Data &amp; modelling</h4>
+      <p><span>pandas</span><span>NumPy</span><span>statsmodels</span><span>scikit-learn</span><span>PyTorch</span><span>XGBoost</span><span>LightGBM</span><span>SHAP</span><span>Sentence-Transformers</span></p>
+    </div>
+    <div>
+      <h4>Pipelines &amp; serving</h4>
+      <p><span>ZenML</span><span>MLflow</span><span>FastAPI</span><span>Streamlit</span><span>Delta Lake</span><span>Linux</span><span>Git</span></p>
+    </div>
+    <div>
+      <h4>How I work</h4>
+      <p><span>pytest</span><span>mypy</span><span>ruff</span><span>GitHub Actions</span><span>held-out eval sets</span><span>written experiment logs</span></p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education"><div class="wrap">
+  <div class="head rv">
+    <div class="mono num">04 — Education</div>
+    <h2>Schooling and certificates.</h2>
+  </div>
+  <div class="edu rv">
+    <div>
+      <span><strong>National Institute of Technology Karnataka</strong>
+      <em>B.Tech, Computer Science &amp; Engineering — Surathkal, Mangalore</em></span>
+      <span class="yr">2023 —</span>
+    </div>
+    <div>
+      <span><strong>Global Indian International School</strong>
+      <em>CBSE XII 96.2% · X 94.8% — Kuala Lumpur, Malaysia</em></span>
+      <span class="yr">2020 – 23</span>
+    </div>
+    <div>
+      <span><strong>Business Intelligence &amp; Analytics</strong>
+      <em>NPTEL — IIT Madras</em></span>
+      <span class="yr">Jan – Apr 2026</span>
+    </div>
+    <a href="https://coursera.org/share/ea201b4a9117cce38637ae75410facae" target="_blank" rel="noopener">
+      <span><strong>Machine Learning: Classification &amp; Regression ↗</strong>
+      <em>Stanford via Coursera</em></span>
+      <span class="yr">Jan 2025</span>
+    </a>
+    <a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/109/noc24-hs152/Course/NPTEL24HS152S85520044603891363.pdf" target="_blank" rel="noopener">
+      <span><strong>Mathematics for Economics I ↗</strong>
+      <em>NPTEL — IIT Madras</em></span>
+      <span class="yr">Apr 2025</span>
+    </a>
+  </div>
+</div></section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="padding-bottom:0"><div class="wrap">
+  <div class="contact">
+    <div class="mono num" style="color:var(--accent);margin-bottom:1.25rem">05 — Contact</div>
+    <a class="big-mail" href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a>
+    <div class="links" style="max-width:22rem;margin-top:2.25rem">
+      <a href="https://github.com/abhijitkar10" target="_blank" rel="noopener"><span>GitHub</span><span class="arw mono">→</span></a>
+      <a href="https://www.linkedin.com/in/abhijit-kar-471a33214/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="arw mono">→</span></a>
     </div>
 
-
-<div id="projects" class="container">
-        <h2 class="section-title">My Projects</h2>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title" onclick="toggleProjectDetails('project1')">Numerical Image Recognition</h5>
-                <div id="project1" class="project-details">
-                    <ul>
-                        <li>Developed an image recognition model to classify handwritten digits using a neural network.</li>
-                        <li>Implemented Python and PyTorch in Google Colab to train and evaluate the model.</li>
-                        <li>Achieved high accuracy in digit classification through optimized model training.</li>
-                    </ul>
-                    <p><a href="https://github.com/abhijitkar10/Numerical-Image-Recognizer" target="_blank">View Project on GitHub</a></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title" onclick="toggleProjectDetails('project2')">Predicting Tennis Match Outcomes</h5>
-                <div id="project2" class="project-details">
-                    <ul>
-                        <li>Developed a predictive model to forecast ATP tennis match outcomes by analyzing historical match data and player statistics.</li>
-                        <li>Engineered features including player rankings, head-to-head records, and surface-specific performance metrics.</li>
-                        <li>Implemented and compared algorithms like Logistic Regression, Random Forest, and XGBoost to enhance model accuracy.</li>
-                        <li>Evaluated model performance using accuracy and log-loss metrics, achieving significant predictive power on unseen data.</li>
-                    </ul>
-                    <p><a href="https://github.com/abhijitkar10/Tennis-Match-Prediction" target="_blank">View Project on GitHub</a></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title" onclick="toggleProjectDetails('project3')">E-Commerce Platform</h5>
-                <div id="project3" class="project-details">
-                    <ul>
-                        <li>Built a full-fledged e-commerce platform supporting multiple user roles, secure login, chatbot, and smooth navigation.</li>
-                        <li>Used HTML, CSS, and JavaScript for the frontend and MySQL for backend database management.</li>
-                    </ul>
-                    <p><a href="https://github.com/abhijitkar10/Multi_eCommerce_platform/tree/main" target="_blank">View Project on GitHub</a></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title" onclick="toggleProjectDetails('project4')">High-Performance Multi-Mobile Node Routing Communication Protocol Analysis</h5>
-                <div id="project4" class="project-details">
-                    <ul>
-                        <li>Analyzed routing protocols for multi-mobile node networks, emphasizing packet forwarding, energy efficiency, and network lifetime.</li>
-                        <li>Developed and implemented dynamic queue management algorithms to minimize packet loss and improve throughput.</li>
-                        <li>Produced an executive technical report summarizing findings and recommendations.</li>
-                    </ul>
-                    <p><a href="https://github.com/abhijitkar10/Packet-Queue-Management-in-Network-Communication" target="_blank">View Project on GitHub</a></p>
-                </div>
-            </div>
-        </div>
+    <div class="foot">
+      <p class="colophon">
+        Set in <b>Instrument Serif</b>, <b>Archivo</b> and <b>JetBrains Mono</b>.
+        One hand-written HTML file — no framework, no build step, no tracking.
+        <br>Last revised September 2026.
+      </p>
+      <p class="mono">© 2026 Abhijit Kar</p>
     </div>
+  </div>
+</div></section>
 
+</main>
 
-    <div id="certifications" class="container">
-        <h2 class="section-title">Certifications / Courses</h2>
+<script>
+// Reveal on scroll. IntersectionObserver, ~10 lines, no library.
+const io = new IntersectionObserver((es) => {
+  for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 55 + 'ms'; io.observe(el); });
 
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title" onclick="toggleProjectDetails('cert1')">
-                    Machine Learning: Classification and Regression 
-                    <small class="text-muted">Jan. 2025</small>
-                </h5>
-                <div id="cert1" class="project-details">
-                    <p><strong>Stanford via Coursera</strong></p>
-                    <ul>
-                        <li>Completed lab assignments focused on machine learning and data analysis.</li>
-                        <li>Used Python libraries like NumPy and Matplotlib for data visualization and numerical computations.</li>
-                        <li>Implemented classification, regression, and clustering models using Scikit-learn.</li>
-                        <li>Gained hands-on experience in feature engineering, model evaluation, and performance tuning.</li>
-                    </ul>
-                    <p><a href="https://coursera.org/share/ea201b4a9117cce38637ae75410facae" target="_blank">Show Credential</a></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title" onclick="toggleProjectDetails('cert2')">
-                    Mathematics for Economics – I 
-                    <small class="text-muted">Apr. 2025</small>
-                </h5>
-                <div id="cert2" class="project-details">
-                    <p><strong>NPTEL (IIT Madras)</strong></p>
-                    <ul>
-                        <li>Explored core mathematical concepts applied in economic analysis.</li>
-                        <li>Covered functions, derivatives, optimization, and matrix algebra.</li>
-                        <li>Applied mathematical tools to solve real-world economic problems.</li>
-                    </ul>
-                    <p><a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/109/noc24-hs152/Course/NPTEL24HS152S85520044603891363.pdf" target="_blank">Show Credential</a></p>
-                </div>
-            </div>
-        </div>
-    </div>   
-
-
-
-
-    
-
-    <!-- Contact Section -->
-    <div id="contact" class="container">
-        <h2 class="section-title">Contact</h2>
-        <p>Email: <a href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/abhijit-kar-471a33214/" target="_blank">LinkedIn Profile</a></p>
-        <p>GitHub: <a href="https://github.com/abhijitkar10" target="_blank">GitHub Profile</a></p>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Abhijit Kar | All rights reserved</p>
-    </footer>
-
-    <!-- Bootstrap JS & Dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Custom JavaScript -->
-    <script>
-        function toggleProjectDetails(projectId) {
-            var details = document.getElementById(projectId);
-            if (details.style.display === "none" || details.style.display === "") {
-                details.style.display = "block";
-            } else {
-                details.style.display = "none";
-            }
-        }
-    </script>
-
+// Count-up on the ledger. Pattern borrowed from Magic UI's NumberTicker, rewritten
+// without motion/react — rAF + easeOutExpo is the whole thing.
+const fmt = (v, dec, group) => {
+  const s = v.toFixed(dec);
+  return group ? Number(s).toLocaleString('en-US') : s;
+};
+const tick = (el) => {
+  const to = parseFloat(el.dataset.to), dec = +el.dataset.dec;
+  const group = el.dataset.group === '1', suffix = el.dataset.suffix || '';
+  const t0 = performance.now(), dur = 1400;
+  const step = (t) => {
+    const p = Math.min((t - t0) / dur, 1);
+    const e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);   // easeOutExpo
+    el.textContent = fmt(to * e, dec, group) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+};
+// The real values are already in the HTML, so no-JS and reduced-motion both read correctly.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const nio = new IntersectionObserver((es) => {
+    for (const e of es) if (e.isIntersecting) { tick(e.target); nio.unobserve(e.target); }
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.stat b').forEach(el => nio.observe(el));
+}
+</script>
 </body>
-
 </html>
