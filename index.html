@@ -10,7 +10,8 @@
 <meta property="og:title" content="Abhijit Kar — Data engineering, ML systems, quantitative finance">
 <meta property="og:description" content="CS at NIT Karnataka. Retrieval systems, MLOps pipelines, and quantitative finance — with the numbers to back them.">
 <meta property="og:url" content="https://abhijitkar10.github.io/portfolio/">
-<meta name="theme-color" content="#FBFAF7">
+<meta name="theme-color" content="#FBFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141310" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2314130F'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23FBFAF7' text-anchor='middle'%3Eak%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +26,12 @@
   --rule:#DFDACE;
   --accent:#C1402A;
   --accent-wash:#F8EFEA;
+  --finding-ink:#4A2318;
+  --code-bg:rgba(193,64,42,.10);
+  --sep:#C0B9AA;
+  --grid-a:rgba(20,19,15,.028);
+  --grid-b:rgba(20,19,15,.016);
+  color-scheme:light;
   --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
   --sans:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -43,8 +50,8 @@ body{
   font-feature-settings:"kern","liga";
   /* ruled-paper ground: two hairline gradients, near-invisible */
   background-image:
-    repeating-linear-gradient(to bottom,transparent 0 31px,rgba(20,19,15,.028) 31px 32px),
-    repeating-linear-gradient(to right,transparent 0 31px,rgba(20,19,15,.016) 31px 32px);
+    repeating-linear-gradient(to bottom,transparent 0 31px,var(--grid-a) 31px 32px),
+    repeating-linear-gradient(to right,transparent 0 31px,var(--grid-b) 31px 32px);
 }
 ::selection{background:var(--accent);color:var(--paper)}
 a{color:inherit;text-decoration:none}
@@ -138,9 +145,9 @@ h3 a:hover{background-size:100% 1px;color:var(--accent)}
   border-radius:0 4px 4px 0;
   max-width:66ch;
 }
-.finding p{font-size:.95rem;line-height:1.6;color:#4A2318}
+.finding p{font-size:.95rem;line-height:1.6;color:var(--finding-ink)}
 .finding .tag{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;font-weight:500}
-.finding code{font-family:var(--mono);font-size:.86em;background:rgba(193,64,42,.1);padding:.05em .3em;border-radius:2px}
+.finding code{font-family:var(--mono);font-size:.86em;background:var(--code-bg);padding:.05em .3em;border-radius:2px}
 
 details{margin-top:1.1rem;max-width:66ch}
 summary{
@@ -173,7 +180,7 @@ details li::marker{color:var(--accent)}
 .kit h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:.7rem}
 .kit p{font-size:1rem;color:var(--ink);line-height:1.8;display:flex;flex-wrap:wrap;gap:.1rem .45rem}
 .kit p span{white-space:nowrap}
-.kit p span::after{content:" ·";color:#C0B9AA}
+.kit p span::after{content:" ·";color:var(--sep)}
 .kit p span:last-child::after{content:""}
 
 /* ---------- education ---------- */
@@ -255,6 +262,47 @@ section[id]{scroll-margin-top:66px}
   .finding::before,.prog{display:none}
   .entry-top .idx,.entry-top .when,.job .idx,.job .when{position:static}
 }
+
+/* ---------- dark ----------
+   Follows the OS by default; the nav toggle sets data-theme and wins either way. */
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+  --paper:#141310;
+  --paper-2:#1C1A16;
+  --ink:#F2EEE6;
+  --ink-2:#ABA396;
+  --ink-3:#7D7568;
+  --rule:#2F2B24;
+  --accent:#E4694B;
+  --accent-wash:#241A15;
+  --finding-ink:#EBD7CE;
+  --code-bg:rgba(228,105,75,.14);
+  --sep:#4A443A;
+  --grid-a:rgba(242,238,230,.030);
+  --grid-b:rgba(242,238,230,.018);
+  color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141310;
+  --paper-2:#1C1A16;
+  --ink:#F2EEE6;
+  --ink-2:#ABA396;
+  --ink-3:#7D7568;
+  --rule:#2F2B24;
+  --accent:#E4694B;
+  --accent-wash:#241A15;
+  --finding-ink:#EBD7CE;
+  --code-bg:rgba(228,105,75,.14);
+  --sep:#4A443A;
+  --grid-a:rgba(242,238,230,.030);
+  --grid-b:rgba(242,238,230,.018);
+  color-scheme:dark;
+}
+.theme{font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:500;background:none;border:0;padding:0;cursor:pointer;color:var(--ink-3);
+  transition:color .18s}
+.theme:hover{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -269,6 +317,7 @@ section[id]{scroll-margin-top:66px}
       <a href="#toolkit">Toolkit</a>
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
+      <button class="theme" type="button" aria-pressed="false">Dark</button>
     </nav>
   </div>
 </header>
@@ -450,23 +499,6 @@ section[id]{scroll-margin-top:66px}
     </div>
   </article>
 
-  <div class="entry rv" style="border-top:1px solid var(--rule)">
-    <div class="entry-top">
-      <div class="idx mono">—</div>
-      <div>
-        <h4 class="mono" style="color:var(--ink-3);font-weight:500;margin-bottom:.6rem">Also on GitHub</h4>
-        <p class="desc" style="margin-top:0">
-          Two smaller systems projects in C, built to learn the area rather than because I work in
-          it: <a href="https://github.com/abhijitkar10/minissd" target="_blank" rel="noopener"><b>MiniSSD</b></a>,
-          an SSD firmware simulator with a NAND model, a page-mapped FTL and garbage collection; and
-          <a href="https://github.com/abhijitkar10/thoth-wtsc" target="_blank" rel="noopener"><b>thoth-wtsc</b></a>,
-          a trace-driven model of the buffer eviction policies in a 2023 architecture paper. Both
-          run from one command if you'd like to look.
-        </p>
-      </div>
-      <div class="when">2026</div>
-    </div>
-  </div>
 
 </div></section>
 
@@ -526,6 +558,10 @@ section[id]{scroll-margin-top:66px}
       <p><span>ZenML</span><span>MLflow</span><span>FastAPI</span><span>Streamlit</span><span>Delta Lake</span><span>Linux</span><span>Git</span></p>
     </div>
     <div>
+      <h4>Away from the keyboard</h4>
+      <p><span>Guitar</span><span>Sport</span></p>
+    </div>
+    <div>
       <h4>How I work</h4>
       <p><span>pytest</span><span>mypy</span><span>ruff</span><span>GitHub Actions</span><span>held-out eval sets</span><span>written experiment logs</span></p>
     </div>
@@ -578,11 +614,7 @@ section[id]{scroll-margin-top:66px}
     </div>
 
     <div class="foot">
-      <p class="colophon">
-        Set in <b>Instrument Serif</b>, <b>Archivo</b> and <b>JetBrains Mono</b>.
-        One hand-written HTML file — no framework, no build step, no tracking.
-        <br>Last revised September 2026.
-      </p>
+      <p class="colophon">Last revised September 2026.</p>
       <p class="mono">© 2026 Abhijit Kar</p>
     </div>
   </div>
@@ -591,6 +623,29 @@ section[id]{scroll-margin-top:66px}
 </main>
 
 <script>
+// Theme: follow the OS unless the visitor has chosen otherwise.
+(() => {
+  const root = document.documentElement, btn = document.querySelector('.theme');
+  const osDark = matchMedia('(prefers-color-scheme: dark)');
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch {}
+  if (saved) root.dataset.theme = saved;
+  const sync = () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : osDark.matches;
+    btn.textContent = dark ? 'Light' : 'Dark';
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+  };
+  btn.addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : osDark.matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+    sync();
+  });
+  osDark.addEventListener('change', sync);
+  sync();
+})();
+
 // Reveals are CSS (animation-timeline: view()). This observer is only the fallback
 // for browsers that don't support scroll-driven animations yet.
 if (!CSS.supports('animation-timeline', 'view()')) {
