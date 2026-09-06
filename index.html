@@ -208,6 +208,51 @@ details li::marker{color:var(--accent)}
   html{scroll-behavior:auto}
 }
 @media print{.bar,.dot::after{display:none}body{background:#fff}}
+
+/* ---------- scroll behaviour ----------
+   All native: CSS scroll-driven animations (animation-timeline), no library.
+   Everything visual sits inside @supports, so older browsers get the static page. */
+
+section[id]{scroll-margin-top:66px}
+.finding{position:relative}
+
+/* reading-progress hairline, pinned under the top bar */
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+@supports (animation-timeline:scroll()){
+  .prog{animation:progress linear both;animation-timeline:scroll(root block)}
+}
+@keyframes progress{to{transform:scaleX(1)}}
+
+/* entry numbers and dates ride alongside the entry you're reading */
+@media(min-width:860px){
+  .entry-top .idx,.entry-top .when,.job .idx,.job .when{position:sticky;top:76px}
+}
+
+@supports (animation-timeline:view()){
+  /* reveals scrubbed by scroll position instead of fired by an observer */
+  .rv{animation:rise linear both;animation-timeline:view();animation-range:entry 6% cover 24%}
+  .rv.in{transition:none}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  /* the masthead settles back as it leaves rather than just scrolling off */
+  .mast h1{animation:lift linear both;animation-timeline:view();animation-range:exit 25% exit 100%}
+  @keyframes lift{from{opacity:1;transform:none}to{opacity:.16;transform:translateY(-10px)}}
+
+  /* each finding's rule draws itself down as the block comes into view */
+  .finding{border-left-color:transparent}
+  .finding::before{content:"";position:absolute;left:-2px;top:0;bottom:0;width:2px;
+    background:var(--accent);transform:scaleY(0);transform-origin:50% 0;
+    animation:draw linear both;animation-timeline:view();animation-range:entry 12% cover 32%}
+  @keyframes draw{to{transform:scaleY(1)}}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .rv,.mast h1{opacity:1!important;transform:none!important;animation:none!important}
+  .finding{border-left-color:var(--accent)!important}
+  .finding::before,.prog{display:none}
+  .entry-top .idx,.entry-top .when,.job .idx,.job .when{position:static}
+}
 </style>
 </head>
 <body>
@@ -215,6 +260,7 @@ details li::marker{color:var(--accent)}
 <header class="bar">
   <div class="wrap">
     <a class="brand" href="#top">Abhijit Kar</a>
+    <div class="prog"></div>
     <nav class="mono">
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
@@ -240,14 +286,13 @@ details li::marker{color:var(--accent)}
     <div class="mast-grid">
       <div>
       <p class="lede">
-        Data engineering, retrieval systems, and — increasingly — quantitative finance. I care
-        less about the demo than about the number underneath it, which is why most things here
-        ship with an eval set, a test suite, or <strong>a record of the experiments that
-        failed</strong>.
+        Data engineering, retrieval systems, and — increasingly — quantitative finance. I'm usually
+        more interested in the number underneath a demo than the demo, so most things here come with
+        an eval set, a test suite, or <strong>a note on the experiments that didn't work</strong>.
       </p>
       <p class="lede" style="margin-top:1.1rem">
-        The finance pull is the real one: a multi-factor equity system I built end to end,
-        price-elasticity modelling at Tredence, and economics coursework to go under it.
+        Lately most of that attention has gone to finance — a multi-factor equity system built end
+        to end, price-elasticity modelling at Tredence, and economics coursework underneath it.
       </p>
       </div>
 
@@ -288,9 +333,9 @@ details li::marker{color:var(--accent)}
 <section id="work"><div class="wrap">
   <div class="head rv">
     <div class="mono num">01 — Work</div>
-    <h2>Five things I built, and what each one taught me.</h2>
-    <p class="note">Every entry carries a <b>finding</b> — the correction, the negative result, or
-    the thing that turned out to be false. Those are the parts worth reading.</p>
+    <h2>A few things I've built.</h2>
+    <p class="note">Each one includes a <b>finding</b>: a correction, a negative result, or
+    something that turned out not to be true. Those tend to be the useful parts.</p>
   </div>
 
   <article class="entry rv">
@@ -307,9 +352,9 @@ details li::marker{color:var(--accent)}
         <div class="finding">
           <span class="tag">Finding</span>
           <p>Two of the five retrieval configurations I tested made things <em>worse</em> —
-          clause-level chunking, and the ms-marco reranker. Both are still in the repo with
-          their numbers. Recall@5 went 0.82 → 0.93 and recall@1 0.61 → 0.77 <em>because</em>
-          I kept the failures instead of quietly deleting them.</p>
+          clause-level chunking, and the ms-marco reranker. Both are still in the repo with their
+          numbers, which made the rest of the tuning easier to reason about. Recall@5 ended at 0.93
+          (from 0.82), recall@1 at 0.77 (from 0.61).</p>
         </div>
         <details>
           <summary>Read the trace</summary>
@@ -342,12 +387,12 @@ details li::marker{color:var(--accent)}
         </p>
         <div class="finding">
           <span class="tag">Finding</span>
-          <p>My baseline scored R² 0.089 and I didn't believe it. The join had fanned out: the same
-          order sat in both train and test, inflating the score <b>3.6×</b>. Aggregating 117,329
-          order-item rows into 97,916 orders gave the honest number — <b>0.025</b>. Four
-          delivery-timing features later (17 total) it reached <b>0.225</b>, with the top three
-          features all delivery-related. Distrusting a result that flattered me is the most useful
-          thing this project taught me.</p>
+          <p>My baseline scored R² 0.089, which seemed high, so I went looking. The join had
+          fanned out — the same order sat in both train and test, inflating the score <b>3.6×</b>.
+          Aggregating 117,329 order-item rows into 97,916 orders gave the honest number,
+          <b>0.025</b>. Four delivery-timing features later (17 in total) it reached <b>0.225</b>,
+          with the top three features all delivery-related. Checking the result that looked good
+          turned out to be the useful part.</p>
         </div>
         <details>
           <summary>Read the trace</summary>
@@ -381,10 +426,10 @@ details li::marker{color:var(--accent)}
         </p>
         <div class="finding">
           <span class="tag">Finding</span>
-          <p>The contract a filesystem actually depends on is that an <em>acknowledged</em> write
-          survives — so that's what the tests pin down, not the happy path. The torture test crashes
-          the drive ten times in a row while it's full. <b>18,763 assertions</b> pass, clean under
-          both gcc and clang.</p>
+          <p>The contract a filesystem depends on is that an <em>acknowledged</em> write
+          survives, so that's what the tests pin down rather than the happy path — the torture test
+          crashes the drive ten times in a row while it's full. <b>18,763 assertions</b> pass, clean
+          under both gcc and clang.</p>
         </div>
         <details>
           <summary>Read the trace</summary>
@@ -455,10 +500,10 @@ details li::marker{color:var(--accent)}
         </p>
         <div class="finding">
           <span class="tag">Finding</span>
-          <p>Survivorship bias is the easiest way to fake a good backtest, so the universe is
-          point-in-time and there's a command whose only job is to prove it
-          (<code>qmf point-in-time TWTR</code>). The honest result: <b>IR 0.66</b>, 5.65% net
-          annualised, 2018 → 2026, 41 names. 49 tests, 9 dependencies.</p>
+          <p>Survivorship bias is an easy way to end up with a backtest that looks better than
+          it is, so the universe is point-in-time and there's a command whose only job is to show
+          what that means (<code>qmf point-in-time TWTR</code>). The result, as measured:
+          <b>IR 0.66</b>, 5.65% net annualised, 2018 → 2026, 41 names. 49 tests, 9 dependencies.</p>
         </div>
         <details>
           <summary>Read the trace</summary>
@@ -483,7 +528,7 @@ details li::marker{color:var(--accent)}
 <section id="experience"><div class="wrap">
   <div class="head rv">
     <div class="mono num">02 — Experience</div>
-    <h2>Where the work was paid for.</h2>
+    <h2>Two internships.</h2>
   </div>
 
   <div class="job rv">
@@ -518,8 +563,8 @@ details li::marker{color:var(--accent)}
   <div class="head rv">
     <div class="mono num">03 — Toolkit</div>
     <h2>What I reach for.</h2>
-    <p class="note">No proficiency bars. A percentage next to a language name is a number nobody
-    can source, and I'd rather you judged the work above.</p>
+    <p class="note">No proficiency bars — a percentage next to a language name isn't sourced
+    from anything. The work above is a better guide.</p>
   </div>
   <div class="kit rv">
     <div>
@@ -600,11 +645,14 @@ details li::marker{color:var(--accent)}
 </main>
 
 <script>
-// Reveal on scroll. IntersectionObserver, ~10 lines, no library.
-const io = new IntersectionObserver((es) => {
-  for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 55 + 'ms'; io.observe(el); });
+// Reveals are CSS (animation-timeline: view()). This observer is only the fallback
+// for browsers that don't support scroll-driven animations yet.
+if (!CSS.supports('animation-timeline', 'view()')) {
+  const io = new IntersectionObserver((es) => {
+    for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 55 + 'ms'; io.observe(el); });
+}
 
 // Count-up on the ledger. Pattern borrowed from Magic UI's NumberTicker, rewritten
 // without motion/react — rAF + easeOutExpo is the whole thing.
