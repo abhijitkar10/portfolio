@@ -124,6 +124,8 @@ h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.1vw,2.15rem
 h3 a{background-image:linear-gradient(var(--accent),var(--accent));background-size:0 1px;background-repeat:no-repeat;background-position:0 92%;transition:background-size .28s ease,color .2s}
 h3 a:hover{background-size:100% 1px;color:var(--accent)}
 .desc{color:var(--ink-2);margin-top:.85rem;max-width:62ch}
+.desc a{border-bottom:1px solid var(--rule);transition:border-color .2s,color .2s}
+.desc a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
 .chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;padding:.2rem .5rem;border:1px solid var(--rule);border-radius:3px;color:var(--ink-2);background:var(--paper)}
 .when{font-family:var(--mono);font-size:.68rem;letter-spacing:.09em;color:var(--ink-3);text-transform:uppercase;white-space:nowrap;padding-top:.55rem}
@@ -323,7 +325,6 @@ section[id]{scroll-margin-top:66px}
       <div class="stat"><b data-to="0.93" data-dec="2">0.93</b><span>recall@5<br>KYC retrieval</span></div>
       <div class="stat"><b data-to="0.225" data-dec="3">0.225</b><span>R² after fixing<br>my own leak</span></div>
       <div class="stat"><b data-to="83.72" data-dec="2" data-suffix="%">83.72%</b><span>ATP match<br>prediction</span></div>
-      <div class="stat"><b data-to="18763" data-dec="0" data-group="1">18,763</b><span>assertions<br>SSD firmware</span></div>
       <div class="stat"><b data-to="0.66" data-dec="2">0.66</b><span>information ratio<br>factor backtest</span></div>
     </div>
   </div>
@@ -417,80 +418,6 @@ section[id]{scroll-margin-top:66px}
     <div class="entry-top">
       <div class="idx mono">03</div>
       <div>
-        <h3><a href="https://github.com/abhijitkar10/minissd" target="_blank" rel="noopener">MiniSSD — SSD firmware, from scratch</a></h3>
-        <p class="desc">
-          A NAND flash chip, the firmware that manages it, and the NVMe interface a host talks to —
-          all in C, no dependencies, running on a laptop. Seven phases: flash model, page-mapped
-          FTL, garbage collection, wear levelling, NVMe front end, demand-paged mapping cache,
-          power-loss recovery.
-        </p>
-        <div class="finding">
-          <span class="tag">Finding</span>
-          <p>The contract a filesystem depends on is that an <em>acknowledged</em> write
-          survives, so that's what the tests pin down rather than the happy path — the torture test
-          crashes the drive ten times in a row while it's full. <b>18,763 assertions</b> pass, clean
-          under both gcc and clang.</p>
-        </div>
-        <details>
-          <summary>Read the trace</summary>
-          <ul>
-            <li>Flash can't overwrite in place, so the FTL lies about addresses — and every later phase is a consequence of that lie.</li>
-            <li>Garbage collection is where write amplification comes from; the simulator reports it directly.</li>
-            <li>Wear levelling exists because phase 3 left some blocks erased far more than others — visible in the erase min/max column.</li>
-            <li>NVMe front end returns real status codes (LBA out of range, invalid opcode) and bounds-checks every DMA.</li>
-            <li>Power-loss recovery rebuilds the mapping table from flash, with periodic checkpoints.</li>
-          </ul>
-        </details>
-        <div class="chips">
-          <span class="chip">C99</span><span class="chip">Zero dependencies</span>
-          <span class="chip">NVMe</span><span class="chip">gcc + clang</span>
-        </div>
-      </div>
-      <div class="when">Aug 2026</div>
-    </div>
-  </article>
-
-  <article class="entry rv">
-    <div class="entry-top">
-      <div class="idx mono">04</div>
-      <div>
-        <h3><a href="https://github.com/abhijitkar10/thoth-wtsc" target="_blank" rel="noopener">thoth-wtsc — auditing an HPCA '23 result</a></h3>
-        <p class="desc">
-          A trace-driven model of the partial-updates-buffer eviction policies in <em>Thoth</em>
-          (Han, Tuck &amp; Awad, HPCA 2023), plus three policies of my own that sit between the
-          paper's two. No gem5 — the paper's decisions are pure functions of cache and buffer
-          state, so the write traffic can be modelled exactly without simulating a cycle.
-        </p>
-        <div class="finding">
-          <span class="tag">Finding</span>
-          <p>WTBC turns out to be <b>decision-equivalent to the oracle</b> — the two predicates are
-          the same. And WTSC's status bit is <b>not composable</b>: layering extra discard rules on
-          top of it silently breaks crash consistency, which <code>--verify</code> catches roughly
-          70,000 times per 2M writes. A zero-storage policy (<code>hybrid-v</code>) recovers 99.8%
-          of the gap.</p>
-        </div>
-        <details>
-          <summary>Read the trace</summary>
-          <ul>
-            <li>Seven policies compared: baseline, the paper's WTSC and WTBC, three new hybrids, and an unimplementable oracle as the lower bound.</li>
-            <li><code>make check</code> asserts the WTBC-equals-oracle identity on every workload.</li>
-            <li>A status-0 entry freeloads on the earlier status-1 entry that dirtied its block — discard the guarantor and the first is orphaned. That's the composability bug.</li>
-            <li>Written in C, single binary, reproducible from one command.</li>
-          </ul>
-        </details>
-        <div class="chips">
-          <span class="chip">C</span><span class="chip">Secure NVM</span>
-          <span class="chip">Trace-driven simulation</span><span class="chip">Paper reproduction</span>
-        </div>
-      </div>
-      <div class="when">Aug 2026</div>
-    </div>
-  </article>
-
-  <article class="entry rv">
-    <div class="entry-top">
-      <div class="idx mono">05</div>
-      <div>
         <h3>Multi-Factor Equity Trading System</h3>
         <p class="desc">
           The institutional quant stack, rebuilt solo at laptop scale: a point-in-time tradable
@@ -522,6 +449,25 @@ section[id]{scroll-margin-top:66px}
       <div class="when">2026</div>
     </div>
   </article>
+
+  <div class="entry rv" style="border-top:1px solid var(--rule)">
+    <div class="entry-top">
+      <div class="idx mono">—</div>
+      <div>
+        <h4 class="mono" style="color:var(--ink-3);font-weight:500;margin-bottom:.6rem">Also on GitHub</h4>
+        <p class="desc" style="margin-top:0">
+          Two smaller systems projects in C, built to learn the area rather than because I work in
+          it: <a href="https://github.com/abhijitkar10/minissd" target="_blank" rel="noopener"><b>MiniSSD</b></a>,
+          an SSD firmware simulator with a NAND model, a page-mapped FTL and garbage collection; and
+          <a href="https://github.com/abhijitkar10/thoth-wtsc" target="_blank" rel="noopener"><b>thoth-wtsc</b></a>,
+          a trace-driven model of the buffer eviction policies in a 2023 architecture paper. Both
+          run from one command if you'd like to look.
+        </p>
+      </div>
+      <div class="when">2026</div>
+    </div>
+  </div>
+
 </div></section>
 
 <!-- ============ EXPERIENCE ============ -->
