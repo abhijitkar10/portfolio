@@ -1,0 +1,27 @@
+# Abhijit Kar
+
+> Computer science student at NIT Karnataka, graduating 2027. Works on data pipelines, retrieval systems and quantitative finance. Looking for graduate roles in data and finance from 2027. Contact: abhijitkar0815@gmail.com
+
+Every project below reports its failed experiments alongside the final result. Numbers are as measured in each repository.
+
+## Projects
+
+- [RBI KYC compliance assistant](https://github.com/abhijitkar10/kyc-rag): retrieval-augmented question answering over the Reserve Bank of India's 107-page KYC Master Direction. Hand-written BM25 plus BGE dense retrieval, fused with reciprocal rank fusion and re-ranked by a cross-encoder; no LangChain. Recall@5 rose from 0.82 to 0.93 on a 50-question eval. Three of seven retrieval runs made results worse and were reverted.
+- [Customer satisfaction pipeline](https://github.com/abhijitkar10/customer-satisfaction-mlops): ZenML and MLflow pipeline over nine Olist e-commerce tables, served with Streamlit. The first model's R² of 0.089 came from a join that leaked orders into the test set; the honest baseline was 0.025, and four delivery-timing features raised it to 0.225.
+- [Multi-factor equity trading system](https://github.com/abhijitkar10/quant-multi-factor-system): point-in-time S&P 500 universe rebuilt from Wikipedia revision history, Delta Lake ingestion behind a data-quality gate, factor and risk models, portfolio construction and a cost-aware backtest. Information ratio 0.66 on 41 hand-picked names fell to 0.02 on 604 point-in-time names: the original edge was survivorship bias. 2023 onward scores 0.33, reported as a period effect.
+
+## Experience
+
+- Tredence, data engineering intern, Bengaluru, May to July 2026: regression model separating baseline sales from promotional lift; own-price elasticity per SKU; automated EDA and reporting pipeline.
+- IIIT Nagpur, research intern, May to August 2025: ATP tennis outcome prediction from dynamic Elo and WElo ratings with 25+ features; XGBoost, LightGBM and gradient boosting ensemble at 83.72% accuracy and 0.93 AUC, explained with SHAP.
+
+## Education
+
+- NIT Karnataka, B.Tech Computer Science and Engineering, 2023 to 2027.
+- Global Indian International School, Kuala Lumpur: CBSE Class XII 96.2%, Class X 94.8%.
+
+## Links
+
+- [Portfolio](https://abhijitkar10.github.io/portfolio/)
+- [GitHub](https://github.com/abhijitkar10)
+- [LinkedIn](https://www.linkedin.com/in/abhijit-kar-471a33214/)

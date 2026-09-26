@@ -1,27 +1,24 @@
-# abhijitkar.dev — portfolio
+# Portfolio
 
-One hand-written HTML file. No framework, no build step, no tracking, no dependencies
-beyond three Google Fonts.
+One hand-written HTML file, plus an `llms.txt` summary for AI tools. No framework, no build
+step, no tracking.
 
-    index.html    the entire site — markup, styles, and ~35 lines of JS
+    index.html    the site: markup, styles, charts and ~120 lines of JS
+    llms.txt      plain-text summary in the llms.txt format (llmstxt.org)
 
 Live: https://abhijitkar10.github.io/portfolio/
 
-## Why one file
-
-The previous version was a Replit scaffold: Express, Drizzle ORM, Passport, Neon
-Postgres and 60 shadcn/ui components, none of which ever ran — GitHub Pages served a
-separate static file the whole time. A résumé page is static content. It doesn't need
-a server, a database, or a session store.
-
 ## Design
 
-- **Type** — Instrument Serif (display), Archivo (text), JetBrains Mono (data and labels).
-- **No proficiency bars.** A percentage next to a language name isn't sourced from anything.
-- **Every project carries a *finding*** — the correction, the negative result, or the
-  thing that turned out to be false. Those sections are the point of the page.
+- **Type:** Satoshi from Fontshare, at one extreme of scale for the name and small for everything else.
+- **Colour:** white, black and one flat ultramarine field. No off-white "paper" ground.
+- **Charts are real data** from each project: the backtest's daily equity curve, the retrieval
+  experiment log, and the R² before and after a data-leak fix. Each has a table view and
+  keyboard-accessible tooltips.
+- **Motion** is native CSS scroll-driven animation (`animation-timeline`) behind `@supports`,
+  and switched off under `prefers-reduced-motion`.
 
 ## Editing
 
-Open `index.html`. Content lives in plain markup; each project is one `<article class="entry">`.
-Push to `working` and GitHub Pages redeploys.
+Content is plain markup in `index.html`. The chart paths and data arrays are baked in; they only
+change if a project's results change. Push to `working` and GitHub Pages redeploys.
