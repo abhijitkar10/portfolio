@@ -374,7 +374,7 @@ section[id]{scroll-margin-top:66px}
       <div class="stat"><b data-to="0.93" data-dec="2">0.93</b><span>recall@5<br>KYC retrieval</span></div>
       <div class="stat"><b data-to="0.225" data-dec="3">0.225</b><span>R² after fixing<br>my own leak</span></div>
       <div class="stat"><b data-to="83.72" data-dec="2" data-suffix="%">83.72%</b><span>ATP match<br>prediction</span></div>
-      <div class="stat"><b data-to="0.66" data-dec="2">0.66</b><span>information ratio<br>factor backtest</span></div>
+      <div class="stat"><b data-to="0.02" data-dec="2">0.02</b><span>IR on the honest<br>universe (was 0.66)</span></div>
     </div>
   </div>
 </div>
@@ -476,10 +476,12 @@ section[id]{scroll-margin-top:66px}
         </p>
         <div class="finding">
           <span class="tag">Finding</span>
-          <p>Survivorship bias is an easy way to end up with a backtest that looks better than
-          it is, so the universe is point-in-time and there's a command whose only job is to show
-          what that means (<code>qmf point-in-time TWTR</code>). The result, as measured:
-          <b>IR 0.66</b>, 5.65% net annualised, 2018 → 2026, 41 names. 49 tests, 9 dependencies.</p>
+          <p>The first backtest scored an information ratio of <b>0.66</b> on 41 names I had picked
+          by hand. Companies that are large today were chosen on their outcome, which is survivorship
+          bias. Rebuilt on 604 names from real point-in-time index membership, reconstructed from
+          Wikipedia's revision history, it scores <b>IR 0.02</b>, +0.15% net a year. Momentum still
+          holds up (IC +0.020); the rest of the edge was the universe. I didn't tune it after seeing
+          the answer.</p>
         </div>
         <details>
           <summary>Read the trace</summary>
@@ -487,6 +489,7 @@ section[id]{scroll-margin-top:66px}
             <li>Every stage is a CLI verb — universe, ingest, match, factors, backtest — so any step can be re-run and inspected on its own.</li>
             <li>Delta Lake tables are versioned; <code>qmf status</code> prints version and row count for each.</li>
             <li>The audit gate rejects an ingest that fails its data-quality checks rather than writing bad prices.</li>
+            <li>From 2023 onward the same strategy scores IR 0.33. That's a period effect, not skill, so both numbers get reported. Quoting only the better one would be picking a window after seeing the answer.</li>
             <li>Private repo — happy to walk through it live.</li>
           </ul>
         </details>
