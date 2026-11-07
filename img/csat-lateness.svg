@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 190" width="560">
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#1f2328}
+.sub{fill:#59636e;font-size:11.5px}.t{font-size:13px;font-weight:600}
+.box{fill:#ffffff;stroke:#d1d9e0;stroke-width:1.2}
+.acc{fill:#ddf4ff;stroke:#0969da}.bad{fill:#ffebe9;stroke:#cf222e}.ok{fill:#dafbe1;stroke:#1a7f37}
+.ar{stroke:#59636e;stroke-width:1.4;fill:none;marker-end:url(#h)}.hd{fill:#59636e}
+.lab{fill:#59636e;font-size:11px}
+@media (prefers-color-scheme:dark){
+ text{fill:#e6edf3}.sub,.lab{fill:#9198a1}
+ .box{fill:#151b23;stroke:#3d444d}.acc{fill:#0d2a4d;stroke:#4493f8}.bad{fill:#3a1d1f;stroke:#f85149}.ok{fill:#12301c;stroke:#3fb950}
+ .ar{stroke:#9198a1}.hd{fill:#9198a1}}
+.bar{fill:#8b949e}.hot{fill:#cf222e}.v{font-size:13px;font-weight:600}@media (prefers-color-scheme:dark){.hot{fill:#f85149}}</style>
+<text x="0" y="16" class="t">Share of orders that end at 1–2 stars</text>
+<text x="0" y="54" class="sub">On time or early · 89,448 orders · mean 4.29★</text>
+<rect x="0" y="60" width="39.6" height="14" rx="3" class="bar"/>
+<text x="47.6" y="72" class="v">9%</text>
+<text x="0" y="102" class="sub">1–7 days late · 3,600 orders · mean 2.72★</text>
+<rect x="0" y="108" width="215.60000000000002" height="14" rx="3" class="hot"/>
+<text x="223.60000000000002" y="120" class="v">49%</text>
+<text x="0" y="150" class="sub">8+ days late · 2,781 orders · mean 1.7★</text>
+<rect x="0" y="156" width="347.6" height="14" rx="3" class="hot"/>
+<text x="355.6" y="168" class="v">79%</text>
+</svg>
