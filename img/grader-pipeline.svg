@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -6 1080 228" width="1080">
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#1f2328}
+.sub{fill:#59636e;font-size:11.5px}.t{font-size:13px;font-weight:600}
+.box{fill:#ffffff;stroke:#d1d9e0;stroke-width:1.2}
+.acc{fill:#ddf4ff;stroke:#0969da}.bad{fill:#ffebe9;stroke:#cf222e}.ok{fill:#dafbe1;stroke:#1a7f37}
+.ar{stroke:#59636e;stroke-width:1.4;fill:none;marker-end:url(#h)}.hd{fill:#59636e}
+.lab{fill:#59636e;font-size:11px}
+@media (prefers-color-scheme:dark){
+ text{fill:#e6edf3}.sub,.lab{fill:#9198a1}
+ .box{fill:#151b23;stroke:#3d444d}.acc{fill:#0d2a4d;stroke:#4493f8}.bad{fill:#3a1d1f;stroke:#f85149}.ok{fill:#12301c;stroke:#3fb950}
+ .ar{stroke:#9198a1}.hd{fill:#9198a1}}
+</style>
+<defs><marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="hd"/></marker></defs>
+<path class="ar" d="M140 70 L180 70"/>
+<path class="ar" d="M320 70 L360 70"/>
+<path class="ar" d="M510 70 L550 70"/>
+<path class="ar" d="M700 60 L720 60 L720 28 L740 28"/>
+<path class="ar" d="M700 80 L720 80 L720 112 L740 112"/>
+<path class="ar" d="M890 28 L910 28 L910 60 L930 60"/>
+<path class="ar" d="M890 112 L910 112 L910 80 L930 80"/>
+<path class="ar" d="M1000 100 L1000 150"/>
+<path class="ar" d="M930 178 L890 178"/>
+<rect x="10" y="40" width="130" height="60" rx="8" class="box "/>
+<text x="75.0" y="66.0" text-anchor="middle" class="t">Scanned PDF</text>
+<text x="75.0" y="82.0" text-anchor="middle" class="sub">one per student</text>
+<rect x="180" y="40" width="140" height="60" rx="8" class="box "/>
+<text x="250.0" y="66.0" text-anchor="middle" class="t">Clean the page</text>
+<text x="250.0" y="82.0" text-anchor="middle" class="sub">remove show-through</text>
+<rect x="360" y="40" width="150" height="60" rx="8" class="box acc"/>
+<text x="435.0" y="58.0" text-anchor="middle" class="t">Read handwriting</text>
+<text x="435.0" y="74.0" text-anchor="middle" class="sub">PaddleOCR-VL</text>
+<text x="435.0" y="90.0" text-anchor="middle" class="sub">lines + positions</text>
+<rect x="550" y="40" width="150" height="60" rx="8" class="box "/>
+<text x="625.0" y="66.0" text-anchor="middle" class="t">Find answers</text>
+<text x="625.0" y="82.0" text-anchor="middle" class="sub">Q21, 21., circled ①</text>
+<rect x="740" y="0" width="150" height="56" rx="8" class="box "/>
+<text x="815.0" y="24.0" text-anchor="middle" class="t">MCQ / one word</text>
+<text x="815.0" y="40.0" text-anchor="middle" class="sub">exact match</text>
+<rect x="740" y="84" width="150" height="56" rx="8" class="box acc"/>
+<text x="815.0" y="108.0" text-anchor="middle" class="t">Written answer</text>
+<text x="815.0" y="124.0" text-anchor="middle" class="sub">local LLM vs key points</text>
+<rect x="930" y="40" width="140" height="60" rx="8" class="box bad"/>
+<text x="1000.0" y="66.0" text-anchor="middle" class="t">Unsure?</text>
+<text x="1000.0" y="82.0" text-anchor="middle" class="sub">flag for the teacher</text>
+<rect x="930" y="150" width="140" height="56" rx="8" class="box ok"/>
+<text x="1000.0" y="174.0" text-anchor="middle" class="t">Teacher reviews</text>
+<text x="1000.0" y="190.0" text-anchor="middle" class="sub">web app</text>
+<rect x="740" y="150" width="150" height="56" rx="8" class="box "/>
+<text x="815.0" y="174.0" text-anchor="middle" class="t">Report cards</text>
+<text x="815.0" y="190.0" text-anchor="middle" class="sub">marks CSV</text>
+<text x="435" y="120" text-anchor="middle" class="lab">everything runs on the laptop</text>
+</svg>

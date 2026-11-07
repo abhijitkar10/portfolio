@@ -47,6 +47,10 @@ body{background:var(--bgColor-default)}
 @media (prefers-reduced-motion:reduce){.card,.side-nav a::before{transition:none}}
 
 .fig{margin:16px 0 0}
+.shot{display:block;width:100%;height:auto;border:1px solid var(--borderColor-default);border-radius:6px}
+.diagram{display:block;width:100%;height:auto;margin:12px 0 4px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media (max-width:543px){.pair{grid-template-columns:1fr}}
 .fig figcaption{font-size:12px;color:var(--fgColor-muted);margin-bottom:8px}
 .chart{display:block;width:100%;max-width:520px;height:auto;overflow:visible}
 .chart.r2{max-width:420px}
@@ -134,10 +138,18 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
     <p>The three runs that made retrieval worse were splitting the text by clause, twice, and a re-ranker trained on web search. They stay in the experiment log.</p>
     <p class="mb-0">In the first 21 generated answers, all 14 citations pointed to pages that had been retrieved, and all three out-of-scope questions were refused.</p>
     <figure class="fig">
+      <figcaption>How a question is answered</figcaption>
+      <img class="diagram" src="img/kyc-architecture.svg" alt="Question goes to dense search and BM25, fused, re-ranked by a BGE cross-encoder, answered by an LLM from the top 5 chunks, then a citation check returns the answer with page numbers or refuses" loading="lazy">
+    </figure>
+    <figure class="fig">
       <figcaption>Recall@5 across seven retrieval runs. Hover a point for its value.</figcaption>
       <svg class="chart kyc" viewBox="0 0 460 238" role="img" aria-labelledby="kyc-t"><title id="kyc-t">Recall at 5 for seven retrieval runs, from 0.82 with dense retrieval to 0.93 with hybrid retrieval and a BGE re-ranker. Three runs made it worse and were reverted.</title><line x1="36" x2="436" y1="188.0" y2="188.0" class="g"/><text x="30" y="192.0" class="tk" text-anchor="end">0.70</text><line x1="36" x2="436" y1="130.7" y2="130.7" class="g"/><text x="30" y="134.7" class="tk" text-anchor="end">0.80</text><line x1="36" x2="436" y1="73.3" y2="73.3" class="g"/><text x="30" y="77.3" class="tk" text-anchor="end">0.90</text><line x1="36" x2="436" y1="16.0" y2="16.0" class="g"/><text x="30" y="20.0" class="tk" text-anchor="end">1.00</text><g class="draw"><path d="M44.0 119.2 L108.0 107.7 L172.0 67.6 L236.0 147.9 L300.0 119.2 L364.0 107.7 L428.0 56.1" class="ln"/><circle cx="44.0" cy="119.2" r="5" class="dot kept"/><circle cx="108.0" cy="107.7" r="5" class="dot kept"/><circle cx="172.0" cy="67.6" r="5" class="dot kept"/><circle cx="236.0" cy="147.9" r="5" class="dot rev"/><circle cx="300.0" cy="119.2" r="5" class="dot rev"/><circle cx="364.0" cy="107.7" r="5" class="dot rev"/><circle cx="428.0" cy="56.1" r="5" class="dot win"/></g><text x="44.0" y="107.2" class="dl" text-anchor="middle">0.82</text><text x="426.0" y="44.1" class="dl" text-anchor="middle">0.93</text><text x="44.0" y="210" class="xl" text-anchor="middle">Dense</text><text x="108.0" y="210" class="xl" text-anchor="middle">BM25</text><text x="172.0" y="210" class="xl" text-anchor="middle">Hybrid<tspan x="172.0" dy="13">RRF</tspan></text><text x="236.0" y="210" class="xl" text-anchor="middle">Clause<tspan x="236.0" dy="13">chunks</tspan></text><text x="300.0" y="210" class="xl" text-anchor="middle">Clause<tspan x="300.0" dy="13">+hybrid</tspan></text><text x="364.0" y="210" class="xl" text-anchor="middle">Rerank<tspan x="364.0" dy="13">ms-marco</tspan></text><text x="428.0" y="210" class="xl" text-anchor="middle">Rerank<tspan x="428.0" dy="13">BGE</tspan></text><circle cx="44.0" cy="119.2" r="13" class="hit" aria-label="Dense: recall at 5 0.82"><title>Dense: 0.82</title></circle><circle cx="108.0" cy="107.7" r="13" class="hit" aria-label="BM25: recall at 5 0.84"><title>BM25: 0.84</title></circle><circle cx="172.0" cy="67.6" r="13" class="hit" aria-label="Hybrid RRF: recall at 5 0.91"><title>Hybrid RRF: 0.91</title></circle><circle cx="236.0" cy="147.9" r="13" class="hit" aria-label="Clause chunks: recall at 5 0.77, reverted"><title>Clause chunks · reverted: 0.77</title></circle><circle cx="300.0" cy="119.2" r="13" class="hit" aria-label="Clause +hybrid: recall at 5 0.82, reverted"><title>Clause +hybrid · reverted: 0.82</title></circle><circle cx="364.0" cy="107.7" r="13" class="hit" aria-label="Rerank ms-marco: recall at 5 0.84, reverted"><title>Rerank ms-marco · reverted: 0.84</title></circle><circle cx="428.0" cy="56.1" r="13" class="hit" aria-label="Rerank BGE: recall at 5 0.93"><title>Rerank BGE: 0.93</title></circle></svg>
       <div class="key"><span><i style="background:var(--fgColor-muted)"></i>kept</span><span><i style="border:2px solid var(--fgColor-danger)"></i>reverted</span><span><i style="background:var(--fgColor-accent)"></i>final</span></div>
       <details class="tbl"><summary>Table</summary><table><thead><tr><th>Run</th><th>Recall@5</th><th></th></tr></thead><tbody><tr><td>Dense</td><td>0.82</td><td>kept</td></tr><tr><td>BM25</td><td>0.84</td><td>kept</td></tr><tr><td>Hybrid RRF</td><td>0.91</td><td>kept</td></tr><tr><td>Clause chunks</td><td>0.77</td><td>reverted</td></tr><tr><td>Clause +hybrid</td><td>0.82</td><td>reverted</td></tr><tr><td>Rerank ms-marco</td><td>0.84</td><td>reverted</td></tr><tr><td>Rerank BGE</td><td>0.93</td><td>kept</td></tr></tbody></table></details>
+    </figure>
+    <figure class="fig">
+      <figcaption>The web app answering a question, with page citations</figcaption>
+      <img class="shot" src="img/kyc-app.png" alt="The KYC app answering whether a bank account can be opened over a video call, citing pages 13 and 27" loading="lazy">
     </figure>
   </div>
   <div class="Box-footer d-flex flex-wrap gap-1">
@@ -161,9 +173,47 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
       <svg class="chart r2" viewBox="0 0 440 196" role="img" aria-labelledby="r2-t"><title id="r2-t">R squared: 0.089 for the leaking first model, 0.025 once fixed, 0.225 with delivery features.</title><text x="0" y="26" class="bl">First model: a join leaked orders into the test set</text><path d="M0 40 h131.3 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-131.3 z" class="bar n"/><text x="143.3" y="55" class="dl">0.089</text><rect x="0" y="18" width="440" height="40" class="hit" aria-label="First model: a join leaked orders into the test set: R squared 0.089"><title>First model: a join leaked orders into the test set: 0.089</title></rect><text x="0" y="86" class="bl">Honest baseline, one row per order</text><path d="M0 100 h34.0 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-34.0 z" class="bar n"/><text x="46.0" y="115" class="dl">0.025</text><rect x="0" y="78" width="440" height="40" class="hit" aria-label="Honest baseline, one row per order: R squared 0.025"><title>Honest baseline, one row per order: 0.025</title></rect><text x="0" y="146" class="bl">Plus four delivery-timing features</text><path d="M0 160 h338.0 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-338.0 z" class="bar a"/><text x="350.0" y="175" class="dl">0.225</text><rect x="0" y="138" width="440" height="40" class="hit" aria-label="Plus four delivery-timing features: R squared 0.225"><title>Plus four delivery-timing features: 0.225</title></rect></svg>
       <details class="tbl"><summary>Table</summary><table><thead><tr><th>Model</th><th>R²</th></tr></thead><tbody><tr><td>First model: a join leaked orders into the test set</td><td>0.089</td></tr><tr><td>Honest baseline, one row per order</td><td>0.025</td></tr><tr><td>Plus four delivery-timing features</td><td>0.225</td></tr></tbody></table></details>
     </figure>
+    <div class="pair">
+      <figure class="fig">
+        <figcaption>Why delivery timing matters</figcaption>
+        <img class="diagram" src="img/csat-lateness.svg" alt="Share of orders ending at 1 to 2 stars: 9% on time, 49% when 1 to 7 days late, 79% when 8 or more days late" loading="lazy">
+      </figure>
+      <figure class="fig">
+        <figcaption>The Streamlit app scoring a late order</figcaption>
+        <img class="shot" src="img/csat-app.png" alt="Streamlit app predicting 1.63 stars for an order delivered 11 days late" loading="lazy">
+      </figure>
+    </div>
   </div>
   <div class="Box-footer d-flex flex-wrap gap-1">
     <span class="Label">Python</span><span class="Label">ZenML</span><span class="Label">MLflow</span><span class="Label">scikit-learn</span><span class="Label">Streamlit</span>
+  </div>
+</article>
+
+<article class="reveal Box card mb-4">
+  <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
+    <h3 class="Box-title flex-auto">promo-audit: did each discount make money?</h3>
+    <span class="Label Label--secondary">May – Jul 2026</span>
+    <span class="Label">Private repo</span>
+  </div>
+  <div class="Box-body">
+    <p class="metric mb-1"><b>9 of 29</b>promos lost money in a sample audit</p>
+    <p class="story mb-3">A sales jump is not the same as a profitable promo.</p>
+    <p>Brands on Blinkit, Zepto and Instamart run discounts constantly. Some of the extra sales would have happened anyway, and some are customers buying early. This tool takes three CSV exports (sales, promos, costs), estimates what would have sold without each promo, and turns the difference into profit or loss per promo on a one-page PDF.</p>
+    <p class="mb-0">The baseline climbs a ladder of methods only as far as the data allows: trailing average, seasonal decomposition, a Bayesian time-series model, and difference-in-differences when a clean comparison exists. A placebo test runs the same maths on weeks with no promo; if it finds fake lift too often, the report is stamped "directional only". On synthetic data with a known lift it recovers 0.379 against a true 0.412.</p>
+    <div class="pair">
+      <figure class="fig">
+        <figcaption>One-page report (synthetic data)</figcaption>
+        <img class="shot" src="img/promo-report.png" alt="Report: 9 of 29 promos lost money, a verdict per promo, and actual sales against the expected baseline" loading="lazy">
+      </figure>
+      <figure class="fig">
+        <figcaption>On real grocery data (dunnhumby, ~16k promos)</figcaption>
+        <img class="diagram" src="img/promo-lift.svg" alt="Estimated lift: price cut 12%, display 44%, feature 73%, feature plus display 194%" loading="lazy">
+        <p class="f6 color-fg-muted mt-2">Estimated lift ranks the way retail research predicts. Real data has no true answer, so this checks the estimates make sense, not that they are exact.</p>
+      </figure>
+    </div>
+  </div>
+  <div class="Box-footer d-flex flex-wrap gap-1">
+    <span class="Label">Python</span><span class="Label">pandas</span><span class="Label">statsmodels</span><span class="Label">WeasyPrint</span><span class="Label">116 tests</span><span class="Label">mypy strict</span>
   </div>
 </article>
 
@@ -174,10 +224,11 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/quant-multi-factor-system" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
-    <p class="metric mb-1"><b>0.66 → ~0</b>information ratio once survivorship bias was removed</p>
+    <p class="metric mb-1"><b>0.66 → −0.15</b>information ratio after two survivorship-bias fixes</p>
     <details class="tbl">
       <summary>Details</summary>
-      <p class="mt-2">A point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor and risk models, portfolio construction, and a backtest with trading costs. On 41 companies I picked by hand the strategy scored 0.66. They were companies that are large today, so the list was chosen with hindsight. On real S&amp;P&nbsp;500 membership, 604 names rebuilt from past revisions of Wikipedia's index page, the edge is gone.</p>
+      <p class="mt-2">A point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor and risk models, portfolio construction, and a backtest with trading costs. On 41 companies I picked by hand the strategy scored 0.66. They were companies that are large today, so the list was chosen with hindsight. Rebuilt on real S&amp;P&nbsp;500 membership from past revisions of Wikipedia's index page, it fell to 0.02. Enforcing membership on every date, so no company is scored before it joined the index, took it to −0.15: no edge.</p>
+      <img class="diagram" src="img/quant-ir.svg" alt="Information ratio 0.66, then 0.02, then minus 0.15" loading="lazy">
     </details>
   </div>
   <div class="Box-footer d-flex flex-wrap gap-1">
@@ -191,12 +242,14 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   <div class="Box-row">
     <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Offline grader for handwritten exams</h3><span class="Label Label--secondary">Sep 2026</span></div>
     <p class="mb-1">Scans of handwritten answer scripts go in; PaddleOCR-VL reads them on the laptop, a small local LLM marks the written answers, and the teacher reviews everything in a web app. Nothing leaves the machine.</p>
-    <p class="f6 color-fg-muted mb-0">On 50 real university scripts it reads 83% of multiple-choice answers, and 97% of the marks it doesn't flag match the teacher's. It finds 91% of written answers. A first version built on TrOCR read 36%.</p>
+    <p class="f6 color-fg-muted">On 50 real university scripts it reads 83% of multiple-choice answers, and 97% of the marks it doesn't flag match the teacher's. It finds 95% of written answers, and total scores land within 5 marks of the teacher's for 21 of 25 students. A first version built on TrOCR read 36%.</p>
+    <img class="shot" src="img/grader-app.png" alt="Exam page: 12 scripts marked, nothing to check, class average 67%" loading="lazy" style="max-width:520px">
   </div>
   <div class="Box-row">
     <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Edge IoT stack on a Raspberry Pi 5</h3><span class="Label Label--secondary">Nov 2026</span></div>
     <p class="mb-1">MQTT, Node-RED, InfluxDB and Grafana in Docker, deployed by the same script to a Pi 5 and to an Azure ARM VM, then benchmarked from one laptop.</p>
-    <p class="f6 color-fg-muted mb-0">Median message round trip 3.9 ms on the Pi against 46.9 ms in the cloud, with no messages lost at 1,000 a second. Estimated three-year cost about ₹9,400 against ₹1,03,600.</p>
+    <p class="f6 color-fg-muted">Median message round trip 3.9 ms on the Pi against 46.9 ms in the cloud, with no messages lost at 1,000 a second. Estimated three-year cost about ₹9,400 against ₹1,03,600.</p>
+    <img class="diagram" src="img/pi-edge-vs-cloud.svg" alt="Edge versus cloud: Pi 5 round trip 3.9 ms against Azure 46.9 ms; three-year cost about 9,400 against 1,03,600 rupees" loading="lazy" style="max-width:640px">
   </div>
 </div>
 
@@ -246,6 +299,11 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
     <p class="mb-1">Business Intelligence and Analytics <span class="color-fg-muted f6">NPTEL, IIT Madras, 2026</span></p>
     <p class="mb-1"><a href="https://coursera.org/share/ea201b4a9117cce38637ae75410facae" target="_blank" rel="noopener">Machine Learning: Classification and Regression</a> <span class="color-fg-muted f6">Stanford, Coursera, 2025</span></p>
     <p class="mb-0"><a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/109/noc24-hs152/Course/NPTEL24HS152S85520044603891363.pdf" target="_blank" rel="noopener">Mathematics for Economics I</a> <span class="color-fg-muted f6">NPTEL, IIT Madras, 2025</span></p>
+  </div>
+  <div class="Box-row">
+    <h3 class="f5 mb-2">Notes I publish</h3>
+    <p class="mb-1"><a href="https://github.com/abhijitkar10/graph-theory" target="_blank" rel="noopener">Graph theory course notes</a> <span class="color-fg-muted f6">every theorem proved in full, following Diestel</span></p>
+    <p class="mb-0"><a href="https://github.com/abhijitkar10/jee-2027-top-1000" target="_blank" rel="noopener">JEE 2027 question bank</a> <span class="color-fg-muted f6">1,500 past questions with worked solutions</span></p>
   </div>
   <div class="Box-row">
     <h3 class="f5 mb-1">Away from a keyboard</h3>
