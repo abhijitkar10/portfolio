@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Abhijit Kar</title>
-<meta name="description" content="Abhijit Kar, computer science at NIT Karnataka. Data pipelines, retrieval systems and quantitative finance. Each project shows the runs that failed next to the one that worked.">
+<meta name="description" content="Abhijit Kar, computer science at NIT Karnataka. Data pipelines and retrieval systems. Each project shows the runs that failed next to the one that worked.">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Abhijit Kar">
-<meta property="og:description" content="Data pipelines, retrieval systems and quantitative finance. NIT Karnataka, 2027.">
+<meta property="og:description" content="Data pipelines and retrieval systems. NIT Karnataka, 2027.">
 <meta property="og:url" content="https://abhijitkar10.github.io/portfolio/">
 <link rel="alternate" type="text/plain" href="llms.txt" title="Plain-text summary for language models">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230969da'/%3E%3Cpath d='M14 50 L26 34 L36 42 L50 16' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<!-- GitHub's Primer design system: tokens from @primer/primitives, components from @primer/css. -->
+<!-- GitHub's Primer design system: tokens from @primer/primitives, components from @primer/css. No JavaScript on this page. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/themes/light.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/themes/dark.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/base/size/size.css">
@@ -21,32 +21,35 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/typography/typography.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/css@21.5.1/dist/primer.css">
 <style>
-/* Only what Primer has no component for: the charts and the tooltip. Colours are Primer tokens. */
+/* Primer has no component for these: the pinned sidebar, the nav line, card hover, and the charts.
+   Every colour is a Primer token, so light and dark mode follow the visitor's system setting. */
 body{background:var(--bgColor-default)}
+.gap-1{gap:4px}.gap-2{gap:8px}
 .Layout-main{min-width:0}
-.gap-1{gap:4px}.gap-2{gap:8px}.gap-3{gap:16px}.gap-4{gap:24px}
-.avatar-initials{width:96px;height:96px;font-size:36px;font-weight:600}
-.Box-title{font-size:16px}
-.stat b{display:block;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+
+/* Pinned left column on wide screens (CSS only). */
+@media (min-width:768px){
+  .Layout-sidebar{position:sticky;top:48px;align-self:start}
+}
+.name{font-size:40px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.side-nav a{display:flex;align-items:center;padding:6px 0;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fgColor-muted)}
+.side-nav a::before{content:"";width:32px;height:1px;margin-right:12px;background:currentColor;transition:width .15s}
+.side-nav a:hover,.side-nav a:focus-visible{color:var(--fgColor-default);text-decoration:none}
+.side-nav a:hover::before,.side-nav a:focus-visible::before{width:64px}
+@media (max-width:767px){.side-nav{display:none}}
+
+/* Cards light up on hover. */
+.card{transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--borderColor-accent-emphasis);box-shadow:var(--shadow-resting-medium,0 3px 6px rgba(0,0,0,.12))}
+.story{font-size:14px;color:var(--fgColor-muted);font-style:italic}
+.metric b{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--fgColor-default);margin-right:6px}
+.metric{color:var(--fgColor-muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){.card,.side-nav a::before{transition:none}}
+
 .fig{margin:16px 0 0}
 .fig figcaption{font-size:12px;color:var(--fgColor-muted);margin-bottom:8px}
-
-.eq{position:relative;height:clamp(200px,30vw,320px);margin:8px 0 30px 34px;touch-action:pan-y;cursor:crosshair}
-.eq svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.eq path{fill:none;stroke:var(--fgColor-accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.eq .gl{position:absolute;left:0;right:0;height:1px;background:var(--borderColor-muted)}
-.eq .gl.base{background:var(--borderColor-default)}
-.eq .yt,.eq .xt{position:absolute;font-size:12px;color:var(--fgColor-muted);font-variant-numeric:tabular-nums}
-.eq .yt{left:-34px;transform:translateY(-50%)}
-.eq .xt{bottom:-24px;transform:translateX(-50%)}
-.eq .xh{position:absolute;top:0;bottom:0;width:1px;background:var(--fgColor-default);opacity:0;pointer-events:none}
-.eq .pt{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--fgColor-accent);box-shadow:0 0 0 2px var(--bgColor-default);opacity:0;pointer-events:none}
-.eq.on .xh,.eq.on .pt{opacity:1}
-.eq .note{position:absolute;left:0;top:calc(var(--base) - 46px);font-size:12px;color:var(--fgColor-muted);max-width:22ch;line-height:1.3}
-@media (max-width:543px){.eq .xt:nth-of-type(even){display:none}}
-
-.chart{display:block;width:100%;max-width:520px;height:auto;overflow:visible;padding-right:12px}
+.chart{display:block;width:100%;max-width:520px;height:auto;overflow:visible}
+.chart.r2{max-width:420px}
 .chart .g{stroke:var(--borderColor-muted);stroke-width:1}
 .chart .tk,.chart .xl,.chart .bl{font:11.5px var(--fontStack-sansSerif);fill:var(--fgColor-muted);font-variant-numeric:tabular-nums}
 .chart .bl{font-size:12.5px}
@@ -59,74 +62,55 @@ body{background:var(--bgColor-default)}
 .chart .bar.n{fill:var(--fgColor-muted)}
 .chart .bar.a{fill:var(--fgColor-accent)}
 .chart .hit{fill:transparent}
-.chart .hit:focus-visible{outline:none;stroke:var(--fgColor-accent);stroke-width:1.5}
 .key{display:flex;gap:16px;font-size:12px;color:var(--fgColor-muted);margin-top:4px}
 .key i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-
 details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);margin-top:12px}
 .tbl table{width:100%;margin-top:8px;font-size:12px;font-variant-numeric:tabular-nums}
 .tbl th,.tbl td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--borderColor-muted)}
-
-.tip{position:fixed;z-index:50;pointer-events:none;background:var(--bgColor-emphasis);color:var(--fgColor-onEmphasis);border-radius:6px;padding:6px 8px;font-size:12px;line-height:1.3;opacity:0;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap}
-.tip b{display:block;font-size:14px}
-.tip.on{opacity:1}
 </style>
 </head>
 <body>
 
-<header class="Header px-3 px-md-4">
-  <div class="Header-item Header-item--full"><a href="#top" class="Header-link f4">Abhijit Kar</a></div>
-  <div class="Header-item d-none d-md-flex"><a href="#work" class="Header-link">Work</a></div>
-  <div class="Header-item d-none d-md-flex"><a href="#experience" class="Header-link">Experience</a></div>
-  <div class="Header-item d-none d-md-flex"><a href="#about" class="Header-link">About</a></div>
-  <div class="Header-item mr-0"><button class="btn btn-sm theme" type="button">Dark</button></div>
-</header>
-
-<div class="container-xl px-3 px-md-4 py-4" id="top">
+<div class="container-lg px-3 px-md-4 py-5" id="top">
 <div class="Layout Layout--flowRow-until-md Layout--sidebarPosition-start Layout--gutter-spacious">
 
-<aside class="Layout-sidebar">
-  <div class="avatar-initials circle d-flex flex-items-center flex-justify-center color-bg-accent-emphasis color-fg-on-emphasis mb-3" aria-hidden="true">AK</div>
-  <h1 class="mb-2"><span class="d-block f2 lh-condensed">Abhijit Kar</span><span class="d-block f4 text-normal color-fg-muted">B.Tech Computer Science, NIT Karnataka</span></h1>
-  <p class="f5 mb-3">I build data pipelines, retrieval systems and backtests. Each project below shows the runs that failed next to the one that worked.</p>
-  <a class="btn btn-block btn-primary mb-3" href="mailto:abhijitkar0815@gmail.com">Email me</a>
-  <ul class="list-style-none f6 color-fg-muted">
-    <li class="mb-1"><span class="clock">Mangalore, India</span></li>
-    <li class="mb-1"><a class="Link--secondary" href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a></li>
-    <li class="mb-1"><a class="Link--secondary" href="https://github.com/abhijitkar10" rel="me noopener" target="_blank">github.com/abhijitkar10</a></li>
-    <li class="mb-1"><a class="Link--secondary" href="https://www.linkedin.com/in/abhijit-kar-471a33214/" rel="me noopener" target="_blank">LinkedIn</a></li>
+<header class="Layout-sidebar">
+  <h1 class="name mb-2">Abhijit Kar</h1>
+  <p class="f4 mb-2">Data pipelines and retrieval systems</p>
+  <p class="f5 color-fg-muted mb-4">Computer science at NIT Karnataka, graduating 2027. Each project shows the runs that failed next to the one that worked.</p>
+
+  <nav class="side-nav mb-5" aria-label="Sections">
+    <a href="#work">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <a class="btn btn-primary mb-3" href="mailto:abhijitkar0815@gmail.com">Email me</a>
+  <ul class="list-style-none f6">
+    <li class="mb-1"><a class="Link--secondary" href="https://github.com/abhijitkar10" rel="me noopener" target="_blank">GitHub</a> · <a class="Link--secondary" href="https://www.linkedin.com/in/abhijit-kar-471a33214/" rel="me noopener" target="_blank">LinkedIn</a></li>
+    <li class="color-fg-muted">Looking for graduate roles in data and finance from 2027.</li>
   </ul>
-  <div class="border-top pt-3 mt-3">
-    <h2 class="h4 mb-2">Looking for</h2>
-    <p class="f6 color-fg-muted">Graduate roles in data and finance, starting 2027.</p>
-  </div>
-</aside>
+</header>
 
 <main class="Layout-main">
 
-<nav class="UnderlineNav mb-4" aria-label="Sections">
-  <div class="UnderlineNav-body">
-    <a class="UnderlineNav-item" href="#work">Projects <span class="Counter">3</span></a>
-    <a class="UnderlineNav-item" href="#experience">Experience <span class="Counter">2</span></a>
-    <a class="UnderlineNav-item" href="#about">About</a>
-  </div>
-</nav>
-
 <div class="Subhead" id="work"><h2 class="Subhead-heading">Projects</h2></div>
 
-<article class="Box mb-4">
+<article class="Box card mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">RBI KYC compliance assistant</h3>
     <span class="Label Label--secondary">Jul 2026</span>
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/kyc-rag" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
+    <p class="metric mb-1"><b>0.82 → 0.93</b>recall@5 on a 50-question eval</p>
+    <p class="story mb-3">Three of seven retrieval changes made it worse.</p>
     <p>Question answering over the Reserve Bank of India's 107-page Master Direction on KYC. It cites the clause behind every answer and refuses questions the document can't answer. Retrieval combines dense embeddings with a BM25 index I wrote myself, merges the two with reciprocal rank fusion, then re-ranks with a cross-encoder. No LangChain.</p>
-    <p>Three of the seven runs made retrieval worse: splitting the text by clause, twice, and a re-ranker trained on web search. They stay in the experiment log. On a 50-question eval, recall@5 went from 0.82 to 0.93.</p>
+    <p>The three runs that made retrieval worse were splitting the text by clause, twice, and a re-ranker trained on web search. They stay in the experiment log.</p>
     <p class="mb-0">In the first 21 generated answers, all 14 citations pointed to pages that had been retrieved, and all three out-of-scope questions were refused.</p>
     <figure class="fig">
-      <figcaption>Recall@5 across seven retrieval runs</figcaption>
-      <svg class="chart kyc" viewBox="0 0 460 238" role="img" aria-labelledby="kyc-t"><title id="kyc-t">Recall at 5 for seven retrieval runs, from 0.82 with dense retrieval to 0.93 with hybrid retrieval and a BGE re-ranker. Three runs made it worse and were reverted.</title><line x1="36" x2="436" y1="188.0" y2="188.0" class="g"/><text x="30" y="192.0" class="tk" text-anchor="end">0.70</text><line x1="36" x2="436" y1="130.7" y2="130.7" class="g"/><text x="30" y="134.7" class="tk" text-anchor="end">0.80</text><line x1="36" x2="436" y1="73.3" y2="73.3" class="g"/><text x="30" y="77.3" class="tk" text-anchor="end">0.90</text><line x1="36" x2="436" y1="16.0" y2="16.0" class="g"/><text x="30" y="20.0" class="tk" text-anchor="end">1.00</text><g class="draw"><path d="M44.0 119.2 L108.0 107.7 L172.0 67.6 L236.0 147.9 L300.0 119.2 L364.0 107.7 L428.0 56.1" class="ln"/><circle cx="44.0" cy="119.2" r="5" class="dot kept"/><circle cx="108.0" cy="107.7" r="5" class="dot kept"/><circle cx="172.0" cy="67.6" r="5" class="dot kept"/><circle cx="236.0" cy="147.9" r="5" class="dot rev"/><circle cx="300.0" cy="119.2" r="5" class="dot rev"/><circle cx="364.0" cy="107.7" r="5" class="dot rev"/><circle cx="428.0" cy="56.1" r="5" class="dot win"/></g><text x="44.0" y="107.2" class="dl" text-anchor="middle">0.82</text><text x="426.0" y="44.1" class="dl" text-anchor="middle">0.93</text><text x="44.0" y="210" class="xl" text-anchor="middle">Dense</text><text x="108.0" y="210" class="xl" text-anchor="middle">BM25</text><text x="172.0" y="210" class="xl" text-anchor="middle">Hybrid<tspan x="172.0" dy="13">RRF</tspan></text><text x="236.0" y="210" class="xl" text-anchor="middle">Clause<tspan x="236.0" dy="13">chunks</tspan></text><text x="300.0" y="210" class="xl" text-anchor="middle">Clause<tspan x="300.0" dy="13">+hybrid</tspan></text><text x="364.0" y="210" class="xl" text-anchor="middle">Rerank<tspan x="364.0" dy="13">ms-marco</tspan></text><text x="428.0" y="210" class="xl" text-anchor="middle">Rerank<tspan x="428.0" dy="13">BGE</tspan></text><circle cx="44.0" cy="119.2" r="13" class="hit" tabindex="0" data-tip="0.82|Dense" aria-label="Dense: recall at 5 0.82"/><circle cx="108.0" cy="107.7" r="13" class="hit" tabindex="0" data-tip="0.84|BM25" aria-label="BM25: recall at 5 0.84"/><circle cx="172.0" cy="67.6" r="13" class="hit" tabindex="0" data-tip="0.91|Hybrid RRF" aria-label="Hybrid RRF: recall at 5 0.91"/><circle cx="236.0" cy="147.9" r="13" class="hit" tabindex="0" data-tip="0.77|Clause chunks · reverted" aria-label="Clause chunks: recall at 5 0.77, reverted"/><circle cx="300.0" cy="119.2" r="13" class="hit" tabindex="0" data-tip="0.82|Clause +hybrid · reverted" aria-label="Clause +hybrid: recall at 5 0.82, reverted"/><circle cx="364.0" cy="107.7" r="13" class="hit" tabindex="0" data-tip="0.84|Rerank ms-marco · reverted" aria-label="Rerank ms-marco: recall at 5 0.84, reverted"/><circle cx="428.0" cy="56.1" r="13" class="hit" tabindex="0" data-tip="0.93|Rerank BGE" aria-label="Rerank BGE: recall at 5 0.93"/></svg>
+      <figcaption>Recall@5 across seven retrieval runs. Hover a point for its value.</figcaption>
+      <svg class="chart kyc" viewBox="0 0 460 238" role="img" aria-labelledby="kyc-t"><title id="kyc-t">Recall at 5 for seven retrieval runs, from 0.82 with dense retrieval to 0.93 with hybrid retrieval and a BGE re-ranker. Three runs made it worse and were reverted.</title><line x1="36" x2="436" y1="188.0" y2="188.0" class="g"/><text x="30" y="192.0" class="tk" text-anchor="end">0.70</text><line x1="36" x2="436" y1="130.7" y2="130.7" class="g"/><text x="30" y="134.7" class="tk" text-anchor="end">0.80</text><line x1="36" x2="436" y1="73.3" y2="73.3" class="g"/><text x="30" y="77.3" class="tk" text-anchor="end">0.90</text><line x1="36" x2="436" y1="16.0" y2="16.0" class="g"/><text x="30" y="20.0" class="tk" text-anchor="end">1.00</text><g class="draw"><path d="M44.0 119.2 L108.0 107.7 L172.0 67.6 L236.0 147.9 L300.0 119.2 L364.0 107.7 L428.0 56.1" class="ln"/><circle cx="44.0" cy="119.2" r="5" class="dot kept"/><circle cx="108.0" cy="107.7" r="5" class="dot kept"/><circle cx="172.0" cy="67.6" r="5" class="dot kept"/><circle cx="236.0" cy="147.9" r="5" class="dot rev"/><circle cx="300.0" cy="119.2" r="5" class="dot rev"/><circle cx="364.0" cy="107.7" r="5" class="dot rev"/><circle cx="428.0" cy="56.1" r="5" class="dot win"/></g><text x="44.0" y="107.2" class="dl" text-anchor="middle">0.82</text><text x="426.0" y="44.1" class="dl" text-anchor="middle">0.93</text><text x="44.0" y="210" class="xl" text-anchor="middle">Dense</text><text x="108.0" y="210" class="xl" text-anchor="middle">BM25</text><text x="172.0" y="210" class="xl" text-anchor="middle">Hybrid<tspan x="172.0" dy="13">RRF</tspan></text><text x="236.0" y="210" class="xl" text-anchor="middle">Clause<tspan x="236.0" dy="13">chunks</tspan></text><text x="300.0" y="210" class="xl" text-anchor="middle">Clause<tspan x="300.0" dy="13">+hybrid</tspan></text><text x="364.0" y="210" class="xl" text-anchor="middle">Rerank<tspan x="364.0" dy="13">ms-marco</tspan></text><text x="428.0" y="210" class="xl" text-anchor="middle">Rerank<tspan x="428.0" dy="13">BGE</tspan></text><circle cx="44.0" cy="119.2" r="13" class="hit" aria-label="Dense: recall at 5 0.82"><title>Dense: 0.82</title></circle><circle cx="108.0" cy="107.7" r="13" class="hit" aria-label="BM25: recall at 5 0.84"><title>BM25: 0.84</title></circle><circle cx="172.0" cy="67.6" r="13" class="hit" aria-label="Hybrid RRF: recall at 5 0.91"><title>Hybrid RRF: 0.91</title></circle><circle cx="236.0" cy="147.9" r="13" class="hit" aria-label="Clause chunks: recall at 5 0.77, reverted"><title>Clause chunks · reverted: 0.77</title></circle><circle cx="300.0" cy="119.2" r="13" class="hit" aria-label="Clause +hybrid: recall at 5 0.82, reverted"><title>Clause +hybrid · reverted: 0.82</title></circle><circle cx="364.0" cy="107.7" r="13" class="hit" aria-label="Rerank ms-marco: recall at 5 0.84, reverted"><title>Rerank ms-marco · reverted: 0.84</title></circle><circle cx="428.0" cy="56.1" r="13" class="hit" aria-label="Rerank BGE: recall at 5 0.93"><title>Rerank BGE: 0.93</title></circle></svg>
       <div class="key"><span><i style="background:var(--fgColor-muted)"></i>kept</span><span><i style="border:2px solid var(--fgColor-danger)"></i>reverted</span><span><i style="background:var(--fgColor-accent)"></i>final</span></div>
       <details class="tbl"><summary>Table</summary><table><thead><tr><th>Run</th><th>Recall@5</th><th></th></tr></thead><tbody><tr><td>Dense</td><td>0.82</td><td>kept</td></tr><tr><td>BM25</td><td>0.84</td><td>kept</td></tr><tr><td>Hybrid RRF</td><td>0.91</td><td>kept</td></tr><tr><td>Clause chunks</td><td>0.77</td><td>reverted</td></tr><tr><td>Clause +hybrid</td><td>0.82</td><td>reverted</td></tr><tr><td>Rerank ms-marco</td><td>0.84</td><td>reverted</td></tr><tr><td>Rerank BGE</td><td>0.93</td><td>kept</td></tr></tbody></table></details>
     </figure>
@@ -136,18 +120,20 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="Box mb-4">
+<article class="Box card mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">Customer satisfaction pipeline</h3>
     <span class="Label Label--secondary">Jul – Aug 2026</span>
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/customer-satisfaction-mlops" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
+    <p class="metric mb-1"><b>0.025 → 0.225</b>R² after fixing a data leak</p>
+    <p class="story mb-3">A join leaked orders into the test set.</p>
     <p>An MLOps pipeline over nine linked tables from the Olist e-commerce dataset. ZenML runs it, MLflow tracks every run, a quality gate decides whether a model gets registered, and Streamlit serves it.</p>
     <p class="mb-0">My first model scored R² 0.089, which was higher than it should have been. A join had copied the same orders into both the training and the test set. Aggregating 117,329 order items into 97,916 orders gave the honest score, 0.025. Four delivery-timing features took it to 0.225.</p>
     <figure class="fig">
       <figcaption>R², before and after the fix</figcaption>
-      <svg class="chart r2" viewBox="0 0 440 196" role="img" aria-labelledby="r2-t"><title id="r2-t">R squared: 0.089 for the leaking first model, 0.025 once fixed, 0.225 with delivery features.</title><text x="0" y="26" class="bl">First model: a join leaked orders into the test set</text><path d="M0 40 h131.3 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-131.3 z" class="bar n"/><text x="143.3" y="55" class="dl">0.089</text><rect x="0" y="18" width="440" height="40" class="hit" tabindex="0" data-tip="0.089|First model: a join leaked orders into the test set" aria-label="First model: a join leaked orders into the test set: R squared 0.089"/><text x="0" y="86" class="bl">Honest baseline, one row per order</text><path d="M0 100 h34.0 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-34.0 z" class="bar n"/><text x="46.0" y="115" class="dl">0.025</text><rect x="0" y="78" width="440" height="40" class="hit" tabindex="0" data-tip="0.025|Honest baseline, one row per order" aria-label="Honest baseline, one row per order: R squared 0.025"/><text x="0" y="146" class="bl">Plus four delivery-timing features</text><path d="M0 160 h338.0 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-338.0 z" class="bar a"/><text x="350.0" y="175" class="dl">0.225</text><rect x="0" y="138" width="440" height="40" class="hit" tabindex="0" data-tip="0.225|Plus four delivery-timing features" aria-label="Plus four delivery-timing features: R squared 0.225"/></svg>
+      <svg class="chart r2" viewBox="0 0 440 196" role="img" aria-labelledby="r2-t"><title id="r2-t">R squared: 0.089 for the leaking first model, 0.025 once fixed, 0.225 with delivery features.</title><text x="0" y="26" class="bl">First model: a join leaked orders into the test set</text><path d="M0 40 h131.3 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-131.3 z" class="bar n"/><text x="143.3" y="55" class="dl">0.089</text><rect x="0" y="18" width="440" height="40" class="hit" aria-label="First model: a join leaked orders into the test set: R squared 0.089"><title>First model: a join leaked orders into the test set: 0.089</title></rect><text x="0" y="86" class="bl">Honest baseline, one row per order</text><path d="M0 100 h34.0 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-34.0 z" class="bar n"/><text x="46.0" y="115" class="dl">0.025</text><rect x="0" y="78" width="440" height="40" class="hit" aria-label="Honest baseline, one row per order: R squared 0.025"><title>Honest baseline, one row per order: 0.025</title></rect><text x="0" y="146" class="bl">Plus four delivery-timing features</text><path d="M0 160 h338.0 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-338.0 z" class="bar a"/><text x="350.0" y="175" class="dl">0.225</text><rect x="0" y="138" width="440" height="40" class="hit" aria-label="Plus four delivery-timing features: R squared 0.225"><title>Plus four delivery-timing features: 0.225</title></rect></svg>
       <details class="tbl"><summary>Table</summary><table><thead><tr><th>Model</th><th>R²</th></tr></thead><tbody><tr><td>First model: a join leaked orders into the test set</td><td>0.089</td></tr><tr><td>Honest baseline, one row per order</td><td>0.025</td></tr><tr><td>Plus four delivery-timing features</td><td>0.225</td></tr></tbody></table></details>
     </figure>
   </div>
@@ -156,26 +142,21 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="Box mb-5">
+<article class="Box card mb-5">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
-    <h3 class="Box-title flex-auto">Multi-factor equity trading system</h3>
+    <h3 class="Box-title flex-auto">Multi-factor equity backtest</h3>
     <span class="Label Label--secondary">2026</span>
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/quant-multi-factor-system" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
-    <p>The stages an institutional quant desk runs, at laptop scale: a point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor construction, a risk model, portfolio construction, and a backtest with trading costs and return attribution. 61 tests.</p>
-    <p>On 41 companies I picked by hand, the strategy scored an information ratio of 0.66. They were companies that are large today, so the list was chosen with hindsight. Rebuilt on real S&amp;P&nbsp;500 membership, taken from past revisions of Wikipedia's index page, it scores 0.02 on 604 names. From 2023 onward it scores 0.33, which I treat as a period effect rather than skill.</p>
-    <figure class="fig">
-      <figcaption>Information ratio</figcaption>
-      <div class="tiles">
-        <div class="Box p-2"><div class="stat"><b>0.66</b></div><span class="f6 color-fg-muted">41 names picked by hand</span></div>
-        <div class="Box p-2 color-border-accent-emphasis"><div class="stat"><b class="color-fg-accent">0.02</b></div><span class="f6 color-fg-muted">604 names, point-in-time</span></div>
-        <div class="Box p-2"><div class="stat"><b>0.33</b></div><span class="f6 color-fg-muted">2023 onward only</span></div>
-      </div>
-    </figure>
+    <p class="metric mb-1"><b>0.66 → 0.02</b>information ratio once survivorship bias was removed</p>
+    <details class="tbl">
+      <summary>Details</summary>
+      <p class="mt-2">A point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor and risk models, portfolio construction, and a backtest with trading costs. On 41 companies I picked by hand the strategy scored 0.66. They were companies that are large today, so the list was chosen with hindsight. On real S&amp;P&nbsp;500 membership, 604 names rebuilt from past revisions of Wikipedia's index page, it scores 0.02.</p>
+    </details>
   </div>
   <div class="Box-footer d-flex flex-wrap gap-1">
-    <span class="Label">Python</span><span class="Label">Polars</span><span class="Label">Delta Lake</span><span class="Label">uv</span>
+    <span class="Label">Python</span><span class="Label">Polars</span><span class="Label">Delta Lake</span>
   </div>
 </article>
 
@@ -232,53 +213,14 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </div>
 
+<footer class="f6 color-fg-muted d-flex flex-wrap gap-2 pb-3">
+  <a class="Link--secondary" href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a> ·
+  <a class="Link--secondary" href="llms.txt">llms.txt</a> ·
+  <span>Built with GitHub's Primer design system, no JavaScript. Updated November 2026.</span>
+</footer>
+
 </main>
 </div>
 </div>
-
-<footer class="container-xl px-3 px-md-4 py-4 border-top f6 color-fg-muted d-flex flex-wrap gap-3" id="contact">
-  <a class="Link--secondary" href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a>
-  <a class="Link--secondary" href="https://github.com/abhijitkar10" target="_blank" rel="noopener">GitHub</a>
-  <a class="Link--secondary" href="https://www.linkedin.com/in/abhijit-kar-471a33214/" target="_blank" rel="noopener">LinkedIn</a>
-  <a class="Link--secondary" href="llms.txt">llms.txt</a>
-  <span class="flex-auto text-right">Built with GitHub's Primer design system. Updated November 2026.</span>
-</footer>
-
-<div class="tip" role="tooltip" aria-hidden="true"><b></b><span></span></div>
-
-<script>
-// Theme: follow the OS unless the visitor picks one. Primer reads data-color-mode.
-(() => {
-  const root = document.documentElement, btn = document.querySelector('.theme');
-  const os = matchMedia('(prefers-color-scheme: dark)');
-  try { const s = localStorage.getItem('theme'); if (s) root.dataset.colorMode = s; } catch {}
-  const dark = () => root.dataset.colorMode === 'auto' ? os.matches : root.dataset.colorMode === 'dark';
-  const sync = () => { btn.textContent = dark() ? 'Light' : 'Dark'; btn.setAttribute('aria-label', dark() ? 'Switch to light theme' : 'Switch to dark theme'); };
-  btn.addEventListener('click', () => {
-    root.dataset.colorMode = dark() ? 'light' : 'dark';
-    try { localStorage.setItem('theme', root.dataset.colorMode); } catch {}
-    sync();
-  });
-  os.addEventListener('change', sync); sync();
-})();
-
-// Local time in Mangalore.
-(() => {
-  const el = document.querySelector('.clock');
-  const f = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
-  const tick = () => { el.textContent = 'Mangalore, India · ' + f.format(new Date()) + ' IST'; };
-  tick(); setInterval(tick, 30000);
-})();
-
-// One tooltip for every chart. Labels go in with textContent, never innerHTML.
-const tip = document.querySelector('.tip'), [tv, tl] = tip.children;
-const show = (value, label, x, y) => { tv.textContent = value; tl.textContent = label; tip.style.left = x + 'px'; tip.style.top = y + 'px'; tip.classList.add('on'); };
-const hide = () => tip.classList.remove('on');
-document.querySelectorAll('[data-tip]').forEach(el => {
-  const on = () => { const r = el.getBoundingClientRect(), [v, l] = el.dataset.tip.split('|'); show(v, l, r.left + r.width / 2, r.top); };
-  el.addEventListener('pointerenter', on); el.addEventListener('focus', on);
-  el.addEventListener('pointerleave', hide); el.addEventListener('blur', hide);
-});
-</script>
 </body>
 </html>
