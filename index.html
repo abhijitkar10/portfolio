@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://abhijitkar10.github.io/portfolio/">
 <link rel="alternate" type="text/plain" href="llms.txt" title="Plain-text summary for language models">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230969da'/%3E%3Cpath d='M14 50 L26 34 L36 42 L50 16' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<!-- GitHub's Primer design system: tokens from @primer/primitives, components from @primer/css. No JavaScript on this page. -->
+<!-- GitHub's Primer design system: tokens from @primer/primitives, components from @primer/css. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/themes/light.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/themes/dark.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/base/size/size.css">
@@ -67,14 +67,39 @@ body{background:var(--bgColor-default)}
 details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);margin-top:12px}
 .tbl table{width:100%;margin-top:8px;font-size:12px;font-variant-numeric:tabular-nums}
 .tbl th,.tbl td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--borderColor-muted)}
+/* Effects. JS only adds classes (see the script at the end); the motion itself is CSS.
+   Everything is skipped for visitors who ask for reduced motion. */
+.loader{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--fgColor-accent);transform-origin:0 50%;z-index:100;animation:load 0.9s ease-out forwards}
+@keyframes load{0%{transform:scaleX(0)}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--fgColor-accent);transform-origin:0 50%;transform:scaleX(0);z-index:99;opacity:.6}
+.spot{background:radial-gradient(600px circle at var(--x,-999px) var(--y,-999px),var(--bgColor-accent-muted),transparent 70%) fixed}
+.boot>*{animation:rise .6s ease-out both}
+.boot>*:nth-child(2){animation-delay:.08s}.boot>*:nth-child(3){animation-delay:.16s}.boot>*:nth-child(4){animation-delay:.24s}.boot>*:nth-child(5){animation-delay:.32s}.boot>*:nth-child(6){animation-delay:.4s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
+.js .reveal.in{opacity:1;transform:none}
+.js .kyc .ln{stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.4s ease-in-out .2s}
+.js .kyc .dot{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.6,1),opacity .2s}
+.js .in .kyc .ln{stroke-dashoffset:0}
+.js .in .kyc .dot{opacity:1;transform:none}
+.js .in .kyc .dot:nth-of-type(1){transition-delay:.3s}.js .in .kyc .dot:nth-of-type(2){transition-delay:.5s}.js .in .kyc .dot:nth-of-type(3){transition-delay:.7s}.js .in .kyc .dot:nth-of-type(4){transition-delay:.9s}.js .in .kyc .dot:nth-of-type(5){transition-delay:1.1s}.js .in .kyc .dot:nth-of-type(6){transition-delay:1.3s}.js .in .kyc .dot:nth-of-type(7){transition-delay:1.5s}
+.js .r2 .bar{transform-box:fill-box;transform-origin:0 50%;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .in .r2 .bar{transform:none}
+.js .in .r2 .bar:nth-of-type(2){transition-delay:.25s}.js .in .r2 .bar:nth-of-type(3){transition-delay:.5s}
+@media (prefers-reduced-motion:reduce){
+  .loader,.progress{display:none}
+  .boot>*{animation:none}
+  .js .reveal,.js .kyc .ln,.js .kyc .dot,.js .r2 .bar{opacity:1;transform:none;stroke-dashoffset:0;transition:none}
+}
 </style>
 </head>
-<body>
+<body class="spot">
+<div class="loader" aria-hidden="true"></div><div class="progress" aria-hidden="true"></div>
 
 <div class="container-lg px-3 px-md-4 py-5" id="top">
 <div class="Layout Layout--flowRow-until-md Layout--sidebarPosition-start Layout--gutter-spacious">
 
-<header class="Layout-sidebar">
+<header class="Layout-sidebar boot">
   <h1 class="name mb-2">Abhijit Kar</h1>
   <p class="f4 mb-2">Data pipelines and retrieval systems</p>
   <p class="f5 color-fg-muted mb-4">Computer science at NIT Karnataka, graduating 2027. Each project shows the runs that failed next to the one that worked.</p>
@@ -96,14 +121,14 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
 
 <div class="Subhead" id="work"><h2 class="Subhead-heading">Projects</h2></div>
 
-<article class="Box card mb-4">
+<article class="reveal Box card mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">RBI KYC compliance assistant</h3>
     <span class="Label Label--secondary">Jul 2026</span>
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/kyc-rag" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
-    <p class="metric mb-1"><b>0.82 → 0.93</b>recall@5 on a 50-question eval</p>
+    <p class="metric mb-1"><b>0.82 → <span class="count" data-to="0.93" data-from="0.82">0.93</span></b>recall@5 on a 50-question eval</p>
     <p class="story mb-3">Three of seven retrieval changes made it worse.</p>
     <p>Question answering over the Reserve Bank of India's 107-page Master Direction on KYC. It cites the clause behind every answer and refuses questions the document can't answer. Retrieval combines dense embeddings with a BM25 index I wrote myself, merges the two with reciprocal rank fusion, then re-ranks with a cross-encoder. No LangChain.</p>
     <p>The three runs that made retrieval worse were splitting the text by clause, twice, and a re-ranker trained on web search. They stay in the experiment log.</p>
@@ -120,14 +145,14 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="Box card mb-4">
+<article class="reveal Box card mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">Customer satisfaction pipeline</h3>
     <span class="Label Label--secondary">Jul – Aug 2026</span>
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/customer-satisfaction-mlops" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
-    <p class="metric mb-1"><b>0.025 → 0.225</b>R² after fixing a data leak</p>
+    <p class="metric mb-1"><b>0.025 → <span class="count" data-to="0.225" data-from="0.025">0.225</span></b>R² after fixing a data leak</p>
     <p class="story mb-3">A join leaked orders into the test set.</p>
     <p>An MLOps pipeline over nine linked tables from the Olist e-commerce dataset. ZenML runs it, MLflow tracks every run, a quality gate decides whether a model gets registered, and Streamlit serves it.</p>
     <p class="mb-0">My first model scored R² 0.089, which was higher than it should have been. A join had copied the same orders into both the training and the test set. Aggregating 117,329 order items into 97,916 orders gave the honest score, 0.025. Four delivery-timing features took it to 0.225.</p>
@@ -142,23 +167,38 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="Box card mb-5">
+<article class="reveal Box card mb-5">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">Multi-factor equity backtest</h3>
     <span class="Label Label--secondary">2026</span>
     <a class="btn btn-sm" href="https://github.com/abhijitkar10/quant-multi-factor-system" target="_blank" rel="noopener">Source</a>
   </div>
   <div class="Box-body">
-    <p class="metric mb-1"><b>0.66 → 0.02</b>information ratio once survivorship bias was removed</p>
+    <p class="metric mb-1"><b>0.66 → ~0</b>information ratio once survivorship bias was removed</p>
     <details class="tbl">
       <summary>Details</summary>
-      <p class="mt-2">A point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor and risk models, portfolio construction, and a backtest with trading costs. On 41 companies I picked by hand the strategy scored 0.66. They were companies that are large today, so the list was chosen with hindsight. On real S&amp;P&nbsp;500 membership, 604 names rebuilt from past revisions of Wikipedia's index page, it scores 0.02.</p>
+      <p class="mt-2">A point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor and risk models, portfolio construction, and a backtest with trading costs. On 41 companies I picked by hand the strategy scored 0.66. They were companies that are large today, so the list was chosen with hindsight. On real S&amp;P&nbsp;500 membership, 604 names rebuilt from past revisions of Wikipedia's index page, the edge is gone.</p>
     </details>
   </div>
   <div class="Box-footer d-flex flex-wrap gap-1">
     <span class="Label">Python</span><span class="Label">Polars</span><span class="Label">Delta Lake</span>
   </div>
 </article>
+
+<div class="Subhead" id="also"><h2 class="Subhead-heading">Also built</h2></div>
+
+<div class="reveal Box card mb-5">
+  <div class="Box-row">
+    <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Offline grader for handwritten exams</h3><span class="Label Label--secondary">Sep 2026</span></div>
+    <p class="mb-1">Scans of handwritten answer scripts go in; PaddleOCR-VL reads them on the laptop, a small local LLM marks the written answers, and the teacher reviews everything in a web app. Nothing leaves the machine.</p>
+    <p class="f6 color-fg-muted mb-0">On 50 real university scripts it reads 83% of multiple-choice answers, and 97% of the marks it doesn't flag match the teacher's. It finds 91% of written answers. A first version built on TrOCR read 36%.</p>
+  </div>
+  <div class="Box-row">
+    <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Edge IoT stack on a Raspberry Pi 5</h3><span class="Label Label--secondary">Nov 2026</span></div>
+    <p class="mb-1">MQTT, Node-RED, InfluxDB and Grafana in Docker, deployed by the same script to a Pi 5 and to an Azure ARM VM, then benchmarked from one laptop.</p>
+    <p class="f6 color-fg-muted mb-0">Median message round trip 3.9 ms on the Pi against 46.9 ms in the cloud, with no messages lost at 1,000 a second. Estimated three-year cost about ₹9,400 against ₹1,03,600.</p>
+  </div>
+</div>
 
 <div class="Subhead" id="experience"><h2 class="Subhead-heading">Experience</h2></div>
 
@@ -192,9 +232,9 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
 <div class="Box mb-5">
   <div class="Box-row">
     <h3 class="f5 mb-2">Tools</h3>
-    <div class="d-flex flex-wrap gap-1 mb-2"><span class="Label Label--accent">Python</span><span class="Label Label--accent">SQL</span><span class="Label Label--accent">C</span><span class="Label Label--accent">C++</span><span class="Label Label--accent">JavaScript</span></div>
+    <div class="d-flex flex-wrap gap-1 mb-2"><span class="Label Label--accent">Python</span><span class="Label Label--accent">SQL</span><span class="Label Label--accent">C</span><span class="Label Label--accent">C++</span></div>
     <div class="d-flex flex-wrap gap-1 mb-2"><span class="Label">pandas</span><span class="Label">Polars</span><span class="Label">NumPy</span><span class="Label">statsmodels</span><span class="Label">scikit-learn</span><span class="Label">PyTorch</span><span class="Label">XGBoost</span><span class="Label">LightGBM</span><span class="Label">SHAP</span><span class="Label">Sentence-Transformers</span></div>
-    <div class="d-flex flex-wrap gap-1"><span class="Label">ZenML</span><span class="Label">MLflow</span><span class="Label">FastAPI</span><span class="Label">Streamlit</span><span class="Label">Delta Lake</span><span class="Label">pytest</span><span class="Label">mypy</span><span class="Label">ruff</span><span class="Label">GitHub Actions</span><span class="Label">Git</span><span class="Label">Linux</span></div>
+    <div class="d-flex flex-wrap gap-1"><span class="Label">ZenML</span><span class="Label">MLflow</span><span class="Label">FastAPI</span><span class="Label">Streamlit</span><span class="Label">Delta Lake</span><span class="Label">pytest</span><span class="Label">mypy</span><span class="Label">ruff</span><span class="Label">GitHub Actions</span><span class="Label">Git</span><span class="Label">Linux</span><span class="Label">JavaScript</span></div>
   </div>
   <div class="Box-row">
     <h3 class="f5 mb-2">Education</h3>
@@ -216,11 +256,48 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
 <footer class="f6 color-fg-muted d-flex flex-wrap gap-2 pb-3">
   <a class="Link--secondary" href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a> ·
   <a class="Link--secondary" href="llms.txt">llms.txt</a> ·
-  <span>Built with GitHub's Primer design system, no JavaScript. Updated November 2026.</span>
+  <span>Built with GitHub's Primer design system. Updated November 2026.</span>
 </footer>
 
 </main>
 </div>
 </div>
+<script>
+// Small effects only; the page works the same without this script.
+(() => {
+  const root = document.documentElement;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  root.classList.add('js');
+
+  // Cards, charts and numbers start when they scroll into view.
+  const countUp = el => {
+    const from = +el.dataset.from, to = +el.dataset.to, dp = el.dataset.to.split('.')[1].length, t0 = performance.now();
+    const step = t => {
+      const k = Math.min(1, (t - t0) / 1200), e = 1 - Math.pow(1 - k, 3);   // ease-out
+      el.textContent = (from + (to - from) * e).toFixed(dp);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('.count').forEach(countUp);
+    io.unobserve(e.target);
+  }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Soft spotlight that follows the cursor, and a reading-progress bar.
+  const bar = document.querySelector('.progress');
+  addEventListener('pointermove', e => {
+    document.body.style.setProperty('--x', e.clientX + 'px');
+    document.body.style.setProperty('--y', e.clientY + 'px');
+  }, { passive: true });
+  addEventListener('scroll', () => {
+    const max = root.scrollHeight - innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? scrollY / max : 0) + ')';
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
