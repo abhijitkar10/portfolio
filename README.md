@@ -1,7 +1,7 @@
 # Portfolio
 
 One hand-written HTML file, plus an `llms.txt` summary for AI tools. No framework, no build
-step, no tracking, no JavaScript.
+step, no tracking. About 40 lines of JavaScript, for effects only.
 
     index.html    the site: markup, styles and charts
     llms.txt      plain-text summary in the llms.txt format (llmstxt.org)
@@ -16,6 +16,9 @@ Live: https://abhijitkar10.github.io/portfolio/
 - **Layout ideas borrowed from:** brittanychiang.com (pinned left column, nav line that grows on
   hover, cards that light up), rauno.me / paco.me (restraint, one headline number per project),
   eugeneyan.com (a one-line story per project).
+- **Effects:** a loading bar, cards and charts that animate in on scroll (the KYC line draws itself,
+  the R² bars grow, headline numbers count up), a cursor spotlight and a reading-progress bar. JS
+  only adds classes; the motion is CSS. All of it is off under `prefers-reduced-motion`.
 - **Own CSS** covers only the pinned sidebar, hover effects and the charts, coloured with Primer
   tokens. Dark mode follows the visitor's system setting.
 - **Charts are real data:** the retrieval experiment log and the R² before and after a data-leak
