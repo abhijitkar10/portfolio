@@ -59,17 +59,7 @@ img{max-width:100%}
 .Box-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
 .Box-row{padding:24px 0;border-top:1px solid var(--hair)}
 .Box-row:first-child{border-top:0;padding-top:0}
-/* Wide screens: project name, date, tags on the left; the story on the right. */
-@media (min-width:900px){
-  article.Box{display:grid;grid-template-columns:260px minmax(0,1fr);column-gap:56px;grid-template-rows:auto 1fr}
-  article.Box .Box-header{grid-column:1;grid-row:1;flex-direction:column;align-items:flex-start;gap:6px}
-  article.Box .Box-footer{grid-column:1;grid-row:2;align-content:flex-start;margin-top:12px}
-  article.Box .Box-body{grid-column:2;grid-row:1/3}
-  .Box-row{display:grid;grid-template-columns:260px minmax(0,1fr);column-gap:56px}
-  .Box-row>*{grid-column:2}
-  .Box-row>:first-child{grid-column:1;grid-row:1/5;align-self:start;flex-direction:column;gap:4px}
-  .TimelineItem{grid-template-columns:260px minmax(0,1fr);column-gap:56px}
-}
+@media (min-width:900px){.TimelineItem{grid-template-columns:260px minmax(0,1fr);column-gap:56px}}
 .Box-body p,.Box-row p,.TimelineItem-body{max-width:72ch}
 
 .Label{display:inline-block;font-size:12px;line-height:1;padding:5px 9px;border-radius:999px;background:var(--pill);color:var(--ink-2);font-weight:500}
@@ -120,6 +110,35 @@ details.tbl summary:hover{color:var(--ink)}
 .when{font-size:14px;color:var(--ink-3);padding-top:2px}
 @media (max-width:560px){.TimelineItem{grid-template-columns:1fr;gap:4px}}
 
+
+/* Projects: one row each, click to open. */
+.projs{border-bottom:1px solid var(--hair)}
+.proj{border-top:1px solid var(--hair)}
+.projs>.proj:first-child{border-top:0}
+.proj summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:6px 24px;padding:20px 0;align-items:start}
+.proj summary::-webkit-details-marker{display:none}
+.proj-name{display:flex;flex-direction:column;gap:2px}
+.proj-name .when{font-size:13px}
+.proj-hook{grid-column:1;display:flex;flex-direction:column;gap:2px}
+.proj-hook .metric b{font-size:22px;display:inline;margin-right:8px}
+.proj-hook .story{font-size:14px}
+.chev{grid-column:2;grid-row:1;width:9px;height:9px;margin-top:8px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s}
+.proj[open] .chev{transform:rotate(225deg);margin-top:12px}
+.proj summary:hover .chev{border-color:var(--ink)}
+.proj summary:hover .Box-title{text-decoration:underline;text-decoration-color:var(--ink-3);text-underline-offset:3px}
+.proj summary:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:4px}
+.proj-body{padding:0 0 32px}
+.proj-side .Box-footer{margin-top:0}
+.proj-side p{margin-top:12px}
+.proj-side:empty{display:none}
+@media (min-width:900px){
+  .proj summary{grid-template-columns:260px minmax(0,1fr) 20px;column-gap:56px;align-items:center}
+  .proj-hook{grid-column:2}
+  .chev{grid-column:3}
+  .proj-body{display:grid;grid-template-columns:260px minmax(0,1fr);column-gap:56px}
+  .proj-side:empty{display:block}
+}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
 /* Utilities the markup uses. */
 .d-flex{display:flex}.flex-wrap{flex-wrap:wrap}.flex-auto{flex:1 1 auto}.flex-items-baseline{align-items:baseline}
 .gap-1{gap:6px}.gap-2{gap:8px}
@@ -147,16 +166,21 @@ footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--ink)
 <main>
 
 <div class="Subhead" id="work"><h2 class="Subhead-heading">Projects</h2></div>
+<div class="projs">
 
-<article class="Box mb-4">
-  <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
-    <h3 class="Box-title flex-auto">RBI KYC compliance assistant</h3>
-    <span class="Label Label--secondary">Jul 2026</span>
-    <a class="btn btn-sm" href="https://github.com/abhijitkar10/kyc-rag" target="_blank" rel="noopener">Source</a>
-  </div>
-  <div class="Box-body">
-    <p class="metric mb-1"><b>0.82 → <span class="count" data-to="0.93" data-from="0.82">0.93</span></b>recall@5 on a 50-question eval</p>
-    <p class="story mb-3">Three of seven retrieval changes made it worse.</p>
+<details class="proj">
+  <summary>
+    <span class="proj-name"><span class="Box-title">RBI KYC compliance assistant</span><span class="when">Jul 2026</span></span>
+    <span class="proj-hook"><span class="metric"><b>0.82 → <span class="count" data-to="0.93" data-from="0.82">0.93</span></b>recall@5 on a 50-question eval</span><span class="story">Three of seven retrieval changes made it worse.</span></span>
+    <span class="chev" aria-hidden="true"></span>
+  </summary>
+  <div class="proj-body">
+    <div class="proj-side"><div class="Box-footer">
+    <span class="Label">Python</span><span class="Label">Sentence-Transformers</span><span class="Label">BM25</span><span class="Label">FastAPI</span>
+  </div><p class="f6"><a href="https://github.com/abhijitkar10/kyc-rag" target="_blank" rel="noopener">Source on GitHub</a></p></div>
+    <div class="Box-body">
+    
+    
     <p>Question answering over the Reserve Bank of India's 107-page Master Direction on KYC. It cites the clause behind every answer and refuses questions the document can't answer. Retrieval combines dense embeddings with a BM25 index I wrote myself, merges the two with reciprocal rank fusion, then re-ranks with a cross-encoder. No LangChain.</p>
     <p>The three runs that made retrieval worse were splitting the text by clause, twice, and a re-ranker trained on web search. They stay in the experiment log.</p>
     <p class="mb-0">In the first 21 generated answers, all 14 citations pointed to pages that had been retrieved, and all three out-of-scope questions were refused.</p>
@@ -175,20 +199,22 @@ footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--ink)
       <img class="shot" src="img/kyc-app.png" alt="The KYC app answering whether a bank account can be opened over a video call, citing pages 13 and 27" loading="lazy">
     </figure>
   </div>
-  <div class="Box-footer d-flex flex-wrap gap-1">
-    <span class="Label">Python</span><span class="Label">Sentence-Transformers</span><span class="Label">BM25</span><span class="Label">FastAPI</span>
   </div>
-</article>
+</details>
 
-<article class="Box mb-4">
-  <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
-    <h3 class="Box-title flex-auto">Customer satisfaction pipeline</h3>
-    <span class="Label Label--secondary">Jul – Aug 2026</span>
-    <a class="btn btn-sm" href="https://github.com/abhijitkar10/customer-satisfaction-mlops" target="_blank" rel="noopener">Source</a>
-  </div>
-  <div class="Box-body">
-    <p class="metric mb-1"><b>0.025 → <span class="count" data-to="0.225" data-from="0.025">0.225</span></b>R² after fixing a data leak</p>
-    <p class="story mb-3">A join leaked orders into the test set.</p>
+<details class="proj">
+  <summary>
+    <span class="proj-name"><span class="Box-title">Customer satisfaction pipeline</span><span class="when">Jul – Aug 2026</span></span>
+    <span class="proj-hook"><span class="metric"><b>0.025 → <span class="count" data-to="0.225" data-from="0.025">0.225</span></b>R² after fixing a data leak</span><span class="story">A join leaked orders into the test set.</span></span>
+    <span class="chev" aria-hidden="true"></span>
+  </summary>
+  <div class="proj-body">
+    <div class="proj-side"><div class="Box-footer">
+    <span class="Label">Python</span><span class="Label">ZenML</span><span class="Label">MLflow</span><span class="Label">scikit-learn</span><span class="Label">Streamlit</span>
+  </div><p class="f6"><a href="https://github.com/abhijitkar10/customer-satisfaction-mlops" target="_blank" rel="noopener">Source on GitHub</a></p></div>
+    <div class="Box-body">
+    
+    
     <p>An MLOps pipeline over nine linked tables from the Olist e-commerce dataset. ZenML runs it, MLflow tracks every run, a quality gate decides whether a model gets registered, and Streamlit serves it.</p>
     <p class="mb-0">My first model scored R² 0.089, which was higher than it should have been. A join had copied the same orders into both the training and the test set. Aggregating 117,329 order items into 97,916 orders gave the honest score, 0.025. Four delivery-timing features took it to 0.225.</p>
     <figure class="fig">
@@ -207,20 +233,22 @@ footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--ink)
       </figure>
     </div>
   </div>
-  <div class="Box-footer d-flex flex-wrap gap-1">
-    <span class="Label">Python</span><span class="Label">ZenML</span><span class="Label">MLflow</span><span class="Label">scikit-learn</span><span class="Label">Streamlit</span>
   </div>
-</article>
+</details>
 
-<article class="Box mb-4">
-  <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
-    <h3 class="Box-title flex-auto">promo-audit: did each discount make money?</h3>
-    <span class="Label Label--secondary">May – Jul 2026</span>
-    <span class="Label">Private repo</span>
-  </div>
-  <div class="Box-body">
-    <p class="metric mb-1"><b>9 of 29</b>promos lost money in a sample audit</p>
-    <p class="story mb-3">A sales jump is not the same as a profitable promo.</p>
+<details class="proj">
+  <summary>
+    <span class="proj-name"><span class="Box-title">promo-audit: did each discount make money?</span><span class="when">May – Jul 2026</span></span>
+    <span class="proj-hook"><span class="metric"><b>9 of 29</b>promos lost money in a sample audit</span><span class="story">A sales jump is not the same as a profitable promo.</span></span>
+    <span class="chev" aria-hidden="true"></span>
+  </summary>
+  <div class="proj-body">
+    <div class="proj-side"><div class="Box-footer">
+    <span class="Label">Python</span><span class="Label">pandas</span><span class="Label">statsmodels</span><span class="Label">WeasyPrint</span><span class="Label">116 tests</span><span class="Label">mypy strict</span>
+  </div><p class="f6">Private repo</p></div>
+    <div class="Box-body">
+    
+    
     <p>Brands on Blinkit, Zepto and Instamart run discounts constantly. Some of the extra sales would have happened anyway, and some are customers buying early. This tool takes three CSV exports (sales, promos, costs), estimates what would have sold without each promo, and turns the difference into profit or loss per promo on a one-page PDF.</p>
     <p class="mb-0">The baseline climbs a ladder of methods only as far as the data allows: trailing average, seasonal decomposition, a Bayesian time-series model, and difference-in-differences when a clean comparison exists. A placebo test runs the same maths on weeks with no promo; if it finds fake lift too often, the report is stamped "directional only". On synthetic data with a known lift it recovers 0.379 against a true 0.412.</p>
     <div class="pair">
@@ -235,46 +263,56 @@ footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--ink)
       </figure>
     </div>
   </div>
-  <div class="Box-footer d-flex flex-wrap gap-1">
-    <span class="Label">Python</span><span class="Label">pandas</span><span class="Label">statsmodels</span><span class="Label">WeasyPrint</span><span class="Label">116 tests</span><span class="Label">mypy strict</span>
   </div>
-</article>
+</details>
 
-<article class="Box mb-5">
-  <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
-    <h3 class="Box-title flex-auto">Multi-factor equity backtest</h3>
-    <span class="Label Label--secondary">2026</span>
-    <a class="btn btn-sm" href="https://github.com/abhijitkar10/quant-multi-factor-system" target="_blank" rel="noopener">Source</a>
-  </div>
-  <div class="Box-body">
-    <p class="metric mb-1"><b>0.66 → −0.15</b>information ratio after two survivorship-bias fixes</p>
-    <details class="tbl">
-      <summary>Details</summary>
+<details class="proj">
+  <summary>
+    <span class="proj-name"><span class="Box-title">Multi-factor equity backtest</span><span class="when">2026</span></span>
+    <span class="proj-hook"><span class="metric"><b>0.66 → −0.15</b>information ratio after two survivorship-bias fixes</span></span>
+    <span class="chev" aria-hidden="true"></span>
+  </summary>
+  <div class="proj-body">
+    <div class="proj-side"><div class="Box-footer">
+    <span class="Label">Python</span><span class="Label">Polars</span><span class="Label">Delta Lake</span>
+  </div><p class="f6"><a href="https://github.com/abhijitkar10/quant-multi-factor-system" target="_blank" rel="noopener">Source on GitHub</a></p></div>
+    <div class="Box-body">
+    
+    
       <p class="mt-2">A point-in-time stock universe, price ingestion into Delta Lake behind a data-quality gate, factor and risk models, portfolio construction, and a backtest with trading costs. On 41 companies I picked by hand the strategy scored 0.66. They were companies that are large today, so the list was chosen with hindsight. Rebuilt on real S&amp;P&nbsp;500 membership from past revisions of Wikipedia's index page, it fell to 0.02. Enforcing membership on every date, so no company is scored before it joined the index, took it to −0.15: no edge.</p>
       <img class="diagram" src="img/quant-ir.svg" alt="Information ratio 0.66, then 0.02, then minus 0.15" loading="lazy">
-    </details>
+    
   </div>
-  <div class="Box-footer d-flex flex-wrap gap-1">
-    <span class="Label">Python</span><span class="Label">Polars</span><span class="Label">Delta Lake</span>
   </div>
-</article>
+</details>
+</div>
 
 <div class="Subhead" id="also"><h2 class="Subhead-heading">Also built</h2></div>
 
-<div class="Box">
-  <div class="Box-row">
-    <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Offline grader for handwritten exams</h3><span class="Label Label--secondary">Sep 2026</span></div>
-    <p class="mb-1">Scans of handwritten answer scripts go in; PaddleOCR-VL reads them on the laptop, a small local LLM marks the written answers, and the teacher reviews everything in a web app. Nothing leaves the machine.</p>
+<div class="projs">
+  <details class="proj">
+  <summary>
+    <span class="proj-name"><span class="Box-title">Offline grader for handwritten exams</span><span class="when">Sep 2026</span></span>
+    <span class="proj-hook"><span class="story">Scans of handwritten answer scripts go in; PaddleOCR-VL reads them on the laptop, a small local LLM marks the written answers, and the teacher reviews everything in a web app. Nothing leaves the machine.</span></span>
+    <span class="chev" aria-hidden="true"></span>
+  </summary>
+  <div class="proj-body"><div class="proj-side"></div><div class="Box-body">
+    
+    
     <p class="f6 color-fg-muted">On 50 real university scripts it reads 83% of multiple-choice answers, and 97% of the marks it doesn't flag match the teacher's. It finds 95% of written answers, and total scores land within 5 marks of the teacher's for 21 of 25 students. A first version built on TrOCR read 36%.</p>
-    <img class="shot" src="img/grader-app.png" alt="Exam page: 12 scripts marked, nothing to check, class average 67%" loading="lazy" style="max-width:520px">
-  </div>
-  <div class="Box-row">
-    <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Edge IoT stack on a Raspberry Pi 5</h3><span class="Label Label--secondary">Nov 2026</span></div>
-    <p class="mb-1">MQTT, Node-RED, InfluxDB and Grafana in Docker, deployed by the same script to a Pi 5 and to an Azure ARM VM, then benchmarked from one laptop.</p>
+    <img class="shot" src="img/grader-app.png" alt="Exam page: 12 scripts marked, nothing to check, class average 67%" loading="lazy" style="max-width:520px"></div></div>
+</details>  <details class="proj">
+  <summary>
+    <span class="proj-name"><span class="Box-title">Edge IoT stack on a Raspberry Pi 5</span><span class="when">Nov 2026</span></span>
+    <span class="proj-hook"><span class="story">MQTT, Node-RED, InfluxDB and Grafana in Docker, deployed by the same script to a Pi 5 and to an Azure ARM VM, then benchmarked from one laptop.</span></span>
+    <span class="chev" aria-hidden="true"></span>
+  </summary>
+  <div class="proj-body"><div class="proj-side"></div><div class="Box-body">
+    
+    
     <p class="f6 color-fg-muted">Median message round trip 3.9 ms on the Pi against 46.9 ms in the cloud, with no messages lost at 1,000 a second. Estimated three-year cost about ₹9,400 against ₹1,03,600.</p>
-    <img class="diagram" src="img/pi-edge-vs-cloud.svg" alt="Edge versus cloud: Pi 5 round trip 3.9 ms against Azure 46.9 ms; three-year cost about 9,400 against 1,03,600 rupees" loading="lazy" style="max-width:640px">
-  </div>
-</div>
+    <img class="diagram" src="img/pi-edge-vs-cloud.svg" alt="Edge versus cloud: Pi 5 round trip 3.9 ms against Azure 46.9 ms; three-year cost about 9,400 against 1,03,600 rupees" loading="lazy" style="max-width:640px"></div></div>
+</details></div>
 
 <div class="Subhead" id="experience"><h2 class="Subhead-heading">Experience</h2></div>
 
