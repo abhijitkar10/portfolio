@@ -11,121 +11,132 @@
 <meta property="og:url" content="https://abhijitkar10.github.io/portfolio/">
 <link rel="alternate" type="text/plain" href="llms.txt" title="Plain-text summary for language models">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230969da'/%3E%3Cpath d='M14 50 L26 34 L36 42 L50 16' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<!-- GitHub's Primer design system: tokens from @primer/primitives, components from @primer/css. -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/themes/light.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/themes/dark.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/base/size/size.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/size/size.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/size/border.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/base/typography/typography.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/primitives@10.7.0/dist/css/functional/typography/typography.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/css@21.5.1/dist/primer.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Primer has no component for these: the pinned sidebar, the nav line, card hover, and the charts.
-   Every colour is a Primer token, so light and dark mode follow the visitor's system setting. */
-body{background:var(--bgColor-default)}
-.gap-1{gap:4px}.gap-2{gap:8px}
-.Layout-main{min-width:0}
-
-/* Pinned left column on wide screens (CSS only). */
-@media (min-width:768px){
-  .Layout-sidebar{position:sticky;top:48px;align-self:start}
+/* Look borrowed from searchbrowser.app: Inter, near-black ink at a few opacities, hairline borders, lots of air. */
+:root{
+  --ink:#171717;--ink-2:rgba(23,23,23,.5);--ink-3:rgba(23,23,23,.36);--hair:rgba(23,23,23,.09);
+  --ground:#fff;--pill:#ececec;--accent:#171717;--danger:#c2410c;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,sans-serif;
 }
-.name{font-size:40px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
-.side-nav a{display:flex;align-items:center;padding:6px 0;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fgColor-muted)}
-.side-nav a::before{content:"";width:32px;height:1px;margin-right:12px;background:currentColor;transition:width .15s}
-.side-nav a:hover,.side-nav a:focus-visible{color:var(--fgColor-default);text-decoration:none}
-.side-nav a:hover::before,.side-nav a:focus-visible::before{width:64px}
-@media (max-width:767px){.side-nav{display:none}}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#ededed;--ink-2:rgba(237,237,237,.55);--ink-3:rgba(237,237,237,.38);--hair:rgba(237,237,237,.1);
+  --ground:#111;--pill:#222;--accent:#ededed;--danger:#fb923c;}}
+/* Names the chart markup already uses. */
+:root{--fgColor-default:var(--ink);--fgColor-muted:var(--ink-2);--fgColor-accent:var(--accent);--fgColor-danger:var(--danger);
+  --bgColor-default:var(--ground);--borderColor-default:var(--hair);--borderColor-muted:var(--hair);--fontStack-sansSerif:var(--font)}
 
-/* Cards light up on hover. */
-.card{transition:border-color .15s,box-shadow .15s}
-.card:hover{border-color:var(--borderColor-accent-emphasis);box-shadow:var(--shadow-resting-medium,0 3px 6px rgba(0,0,0,.12))}
-.story{font-size:14px;color:var(--fgColor-muted);font-style:italic}
-.metric b{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--fgColor-default);margin-right:6px}
-.metric{color:var(--fgColor-muted);font-size:14px}
-@media (prefers-reduced-motion:reduce){.card,.side-nav a::before{transition:none}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.6 var(--font);-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
+h1,h2,h3,p,ul,figure{margin:0}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ink-3);text-underline-offset:3px;transition:text-decoration-color .15s}
+a:hover{text-decoration-color:var(--ink)}
+img{max-width:100%}
 
-.fig{margin:16px 0 0}
-.shot{display:block;width:100%;height:auto;border:1px solid var(--borderColor-default);border-radius:6px}
+.page{max-width:680px;margin:0 auto;padding:clamp(48px,9vw,120px) 24px 64px}
+.intro{margin-bottom:clamp(64px,9vw,112px)}
+.name{font-size:21px;font-weight:500;letter-spacing:.01em;margin-bottom:12px}
+.intro p{color:var(--ink-2);max-width:520px}
+.intro .lede{color:var(--ink);font-size:21px;line-height:1.45;margin-bottom:12px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:28px;font-size:14px}
+.btn-primary{display:inline-block;background:var(--ink);color:var(--ground);text-decoration:none;font-weight:500;padding:8px 16px;border-radius:999px;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+.actions a:not(.btn-primary){color:var(--ink-2);text-decoration:none}
+.actions a:not(.btn-primary):hover{color:var(--ink)}
+
+.Subhead{margin:clamp(64px,9vw,112px) 0 24px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.Subhead-heading{font-size:13px;font-weight:500;color:var(--ink-2)}
+
+.Box{border-top:1px solid var(--hair);padding:32px 0}
+.Box:first-of-type{border-top:0}
+.Box-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:12px}
+.Box-title{font-size:16px;font-weight:600;flex:1 1 auto}
+.Box-body p{margin-bottom:12px}
+.Box-body p.mb-0{margin-bottom:0}
+.Box-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.Box-row{padding:24px 0;border-top:1px solid var(--hair)}
+.Box-row:first-child{border-top:0;padding-top:0}
+
+.Label{display:inline-block;font-size:12px;line-height:1;padding:5px 9px;border-radius:999px;background:var(--pill);color:var(--ink-2);font-weight:500}
+.Label--secondary{background:none;padding:0;font-size:13px;color:var(--ink-3);font-weight:400}
+.Label--accent{background:var(--ink);color:var(--ground)}
+.btn-sm{font-size:13px;color:var(--ink-2)}
+.btn-sm:hover{color:var(--ink)}
+
+.metric{color:var(--ink-2);font-size:14px}
+.metric b{display:block;font-size:28px;font-weight:500;letter-spacing:-.01em;font-variant-numeric:tabular-nums;color:var(--ink);margin-bottom:2px}
+.story{color:var(--ink-2);font-size:15px}
+
+.fig{margin-top:24px}
+.fig figcaption{font-size:13px;color:var(--ink-2);margin-bottom:10px}
+.shot{display:block;width:100%;height:auto;border:1px solid var(--hair);border-radius:8px}
 .diagram{display:block;width:100%;height:auto;margin:12px 0 4px}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-@media (max-width:543px){.pair{grid-template-columns:1fr}}
-.fig figcaption{font-size:12px;color:var(--fgColor-muted);margin-bottom:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media (max-width:560px){.pair{grid-template-columns:1fr}}
+
 .chart{display:block;width:100%;max-width:520px;height:auto;overflow:visible}
 .chart.r2{max-width:420px}
-.chart .g{stroke:var(--borderColor-muted);stroke-width:1}
-.chart .tk,.chart .xl,.chart .bl{font:11.5px var(--fontStack-sansSerif);fill:var(--fgColor-muted);font-variant-numeric:tabular-nums}
+.chart .g{stroke:var(--hair);stroke-width:1}
+.chart .tk,.chart .xl,.chart .bl{font:11.5px var(--font);fill:var(--ink-2);font-variant-numeric:tabular-nums}
 .chart .bl{font-size:12.5px}
-.chart .dl{font:600 13px var(--fontStack-sansSerif);fill:var(--fgColor-default)}
-.chart .ln{fill:none;stroke:var(--fgColor-muted);stroke-width:2;stroke-linejoin:round}
-.chart .dot{stroke:var(--bgColor-default);stroke-width:2}
-.chart .dot.kept{fill:var(--fgColor-muted)}
-.chart .dot.win{fill:var(--fgColor-accent)}
-.chart .dot.rev{fill:var(--bgColor-default);stroke:var(--fgColor-danger)}
-.chart .bar.n{fill:var(--fgColor-muted)}
-.chart .bar.a{fill:var(--fgColor-accent)}
+.chart .dl{font:600 13px var(--font);fill:var(--ink)}
+.chart .ln{fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linejoin:round}
+.chart .dot{stroke:var(--ground);stroke-width:2}
+.chart .dot.kept{fill:var(--ink-3)}
+.chart .dot.win{fill:var(--ink)}
+.chart .dot.rev{fill:var(--ground);stroke:var(--danger)}
+.chart .bar.n{fill:var(--ink-3)}
+.chart .bar.a{fill:var(--ink)}
 .chart .hit{fill:transparent}
-.key{display:flex;gap:16px;font-size:12px;color:var(--fgColor-muted);margin-top:4px}
+.key{display:flex;gap:16px;font-size:12px;color:var(--ink-2);margin-top:4px}
 .key i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);margin-top:12px}
-.tbl table{width:100%;margin-top:8px;font-size:12px;font-variant-numeric:tabular-nums}
-.tbl th,.tbl td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--borderColor-muted)}
-/* Effects. JS only adds classes (see the script at the end); the motion itself is CSS.
-   Everything is skipped for visitors who ask for reduced motion. */
-.loader{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--fgColor-accent);transform-origin:0 50%;z-index:100;animation:load 0.9s ease-out forwards}
-@keyframes load{0%{transform:scaleX(0)}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
-.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--fgColor-accent);transform-origin:0 50%;transform:scaleX(0);z-index:99;opacity:.6}
-.spot{background:radial-gradient(600px circle at var(--x,-999px) var(--y,-999px),var(--bgColor-accent-muted),transparent 70%) fixed}
-.boot>*{animation:rise .6s ease-out both}
-.boot>*:nth-child(2){animation-delay:.08s}.boot>*:nth-child(3){animation-delay:.16s}.boot>*:nth-child(4){animation-delay:.24s}.boot>*:nth-child(5){animation-delay:.32s}.boot>*:nth-child(6){animation-delay:.4s}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
-.js .reveal.in{opacity:1;transform:none}
-.js .kyc .ln{stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.4s ease-in-out .2s}
-.js .kyc .dot{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.6,1),opacity .2s}
-.js .in .kyc .ln{stroke-dashoffset:0}
-.js .in .kyc .dot{opacity:1;transform:none}
-.js .in .kyc .dot:nth-of-type(1){transition-delay:.3s}.js .in .kyc .dot:nth-of-type(2){transition-delay:.5s}.js .in .kyc .dot:nth-of-type(3){transition-delay:.7s}.js .in .kyc .dot:nth-of-type(4){transition-delay:.9s}.js .in .kyc .dot:nth-of-type(5){transition-delay:1.1s}.js .in .kyc .dot:nth-of-type(6){transition-delay:1.3s}.js .in .kyc .dot:nth-of-type(7){transition-delay:1.5s}
-.js .r2 .bar{transform-box:fill-box;transform-origin:0 50%;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.js .in .r2 .bar{transform:none}
-.js .in .r2 .bar:nth-of-type(2){transition-delay:.25s}.js .in .r2 .bar:nth-of-type(3){transition-delay:.5s}
-@media (prefers-reduced-motion:reduce){
-  .loader,.progress{display:none}
-  .boot>*{animation:none}
-  .js .reveal,.js .kyc .ln,.js .kyc .dot,.js .r2 .bar{opacity:1;transform:none;stroke-dashoffset:0;transition:none}
-}
+details.tbl summary{cursor:pointer;font-size:13px;color:var(--ink-2);margin-top:12px}
+details.tbl summary:hover{color:var(--ink)}
+.tbl table{width:100%;margin-top:8px;font-size:13px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--hair)}
+.tbl th{font-weight:500;color:var(--ink-2)}
+
+.TimelineItem{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--hair)}
+.TimelineItem:first-child{border-top:0;padding-top:0}
+.TimelineItem-badge{display:none}
+.TimelineItem-body h3{font-size:16px;font-weight:600}
+.TimelineItem-body ul{padding-left:18px;color:var(--ink)}
+.TimelineItem-body li{margin-bottom:6px}
+.when{font-size:14px;color:var(--ink-3);padding-top:2px}
+@media (max-width:560px){.TimelineItem{grid-template-columns:1fr;gap:4px}}
+
+/* Utilities the markup uses. */
+.d-flex{display:flex}.flex-wrap{flex-wrap:wrap}.flex-auto{flex:1 1 auto}.flex-items-baseline{align-items:baseline}
+.gap-1{gap:6px}.gap-2{gap:8px}
+.f5{font-size:16px;font-weight:600}.f6{font-size:14px}
+.color-fg-muted,.color-fg-muted a{color:var(--ink-2)}
+.mb-0{margin-bottom:0}.mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mt-2{margin-top:8px}.ml-1{margin-left:4px}
+footer{margin-top:clamp(64px,9vw,112px);padding-top:20px;border-top:1px solid var(--hair);font-size:13px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 16px}
+footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--ink)}
 </style>
 </head>
-<body class="spot">
-<div class="loader" aria-hidden="true"></div><div class="progress" aria-hidden="true"></div>
+<body>
+<div class="page" id="top">
 
-<div class="container-lg px-3 px-md-4 py-5" id="top">
-<div class="Layout Layout--flowRow-until-md Layout--sidebarPosition-start Layout--gutter-spacious">
-
-<header class="Layout-sidebar boot">
-  <h1 class="name mb-2">Abhijit Kar</h1>
-  <p class="f4 mb-2">Data pipelines and retrieval systems</p>
-  <p class="f5 color-fg-muted mb-4">Computer science at NIT Karnataka, graduating 2027. Each project shows the runs that failed next to the one that worked.</p>
-
-  <nav class="side-nav mb-5" aria-label="Sections">
-    <a href="#work">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#about">About</a>
-  </nav>
-
-  <a class="btn btn-primary mb-3" href="mailto:abhijitkar0815@gmail.com">Email me</a>
-  <ul class="list-style-none f6">
-    <li class="mb-1"><a class="Link--secondary" href="https://github.com/abhijitkar10" rel="me noopener" target="_blank">GitHub</a> · <a class="Link--secondary" href="https://www.linkedin.com/in/abhijit-kar-471a33214/" rel="me noopener" target="_blank">LinkedIn</a></li>
-    <li class="color-fg-muted">Looking for graduate roles in data and finance from 2027.</li>
-  </ul>
+<header class="intro">
+  <h1 class="name">Abhijit Kar</h1>
+  <p class="lede">Data pipelines and retrieval systems.</p>
+  <p>Computer science at NIT Karnataka, graduating 2027. Each project shows the runs that failed next to the one that worked. Looking for graduate roles in data and finance from 2027.</p>
+  <div class="actions">
+    <a class="btn-primary" href="mailto:abhijitkar0815@gmail.com">Email me</a>
+    <a href="https://github.com/abhijitkar10" rel="me noopener" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/abhijit-kar-471a33214/" rel="me noopener" target="_blank">LinkedIn</a>
+  </div>
 </header>
 
-<main class="Layout-main">
+<main>
 
 <div class="Subhead" id="work"><h2 class="Subhead-heading">Projects</h2></div>
 
-<article class="reveal Box card mb-4">
+<article class="Box mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">RBI KYC compliance assistant</h3>
     <span class="Label Label--secondary">Jul 2026</span>
@@ -157,7 +168,7 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="reveal Box card mb-4">
+<article class="Box mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">Customer satisfaction pipeline</h3>
     <span class="Label Label--secondary">Jul – Aug 2026</span>
@@ -189,7 +200,7 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="reveal Box card mb-4">
+<article class="Box mb-4">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">promo-audit: did each discount make money?</h3>
     <span class="Label Label--secondary">May – Jul 2026</span>
@@ -217,7 +228,7 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </article>
 
-<article class="reveal Box card mb-5">
+<article class="Box mb-5">
   <div class="Box-header d-flex flex-wrap flex-items-center gap-2">
     <h3 class="Box-title flex-auto">Multi-factor equity backtest</h3>
     <span class="Label Label--secondary">2026</span>
@@ -238,7 +249,7 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
 
 <div class="Subhead" id="also"><h2 class="Subhead-heading">Also built</h2></div>
 
-<div class="reveal Box card mb-5">
+<div class="Box">
   <div class="Box-row">
     <div class="d-flex flex-wrap flex-items-baseline gap-2 mb-1"><h3 class="f5 flex-auto">Offline grader for handwritten exams</h3><span class="Label Label--secondary">Sep 2026</span></div>
     <p class="mb-1">Scans of handwritten answer scripts go in; PaddleOCR-VL reads them on the laptop, a small local LLM marks the written answers, and the teacher reviews everything in a web app. Nothing leaves the machine.</p>
@@ -257,9 +268,9 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
 
 <div class="mb-5">
   <div class="TimelineItem">
-    <div class="TimelineItem-badge"><span class="f6 text-bold">T</span></div>
+    <div class="when">May – Jul 2026</div>
     <div class="TimelineItem-body">
-      <h3 class="f5 mb-0">Tredence <span class="Label Label--secondary ml-1">May – Jul 2026</span></h3>
+      <h3 class="mb-0">Tredence</h3>
       <p class="f6 color-fg-muted mb-2">Data engineering intern, Bengaluru</p>
       <ul class="pl-3">
         <li>Built a regression model to separate baseline sales from promotional lift, then estimated the own-price elasticity of each SKU for pricing decisions.</li>
@@ -268,9 +279,9 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
     </div>
   </div>
   <div class="TimelineItem">
-    <div class="TimelineItem-badge"><span class="f6 text-bold">I</span></div>
+    <div class="when">May – Aug 2025</div>
     <div class="TimelineItem-body">
-      <h3 class="f5 mb-0">IIIT Nagpur <span class="Label Label--secondary ml-1">May – Aug 2025</span></h3>
+      <h3 class="mb-0">IIIT Nagpur</h3>
       <p class="f6 color-fg-muted mb-2">Research intern, Nagpur</p>
       <ul class="pl-3">
         <li>Built a pipeline to predict ATP tennis results from dynamic Elo and WElo ratings and more than 25 engineered features.</li>
@@ -282,7 +293,7 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
 
 <div class="Subhead" id="about"><h2 class="Subhead-heading">About</h2></div>
 
-<div class="Box mb-5">
+<div class="Box">
   <div class="Box-row">
     <h3 class="f5 mb-2">Tools</h3>
     <div class="d-flex flex-wrap gap-1 mb-2"><span class="Label Label--accent">Python</span><span class="Label Label--accent">SQL</span><span class="Label Label--accent">C</span><span class="Label Label--accent">C++</span></div>
@@ -306,51 +317,13 @@ details.tbl summary{cursor:pointer;font-size:12px;color:var(--fgColor-accent);ma
   </div>
 </div>
 
-<footer class="f6 color-fg-muted d-flex flex-wrap gap-2 pb-3">
-  <a class="Link--secondary" href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a> ·
-  <a class="Link--secondary" href="llms.txt">llms.txt</a> ·
-  <span>Built with GitHub's Primer design system. Updated November 2026.</span>
+<footer>
+  <a href="mailto:abhijitkar0815@gmail.com">abhijitkar0815@gmail.com</a>
+  <a href="llms.txt">llms.txt</a>
+  <span>Updated November 2026</span>
 </footer>
 
 </main>
 </div>
-</div>
-<script>
-// Small effects only; the page works the same without this script.
-(() => {
-  const root = document.documentElement;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  root.classList.add('js');
-
-  // Cards, charts and numbers start when they scroll into view.
-  const countUp = el => {
-    const from = +el.dataset.from, to = +el.dataset.to, dp = el.dataset.to.split('.')[1].length, t0 = performance.now();
-    const step = t => {
-      const k = Math.min(1, (t - t0) / 1200), e = 1 - Math.pow(1 - k, 3);   // ease-out
-      el.textContent = (from + (to - from) * e).toFixed(dp);
-      if (k < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  const io = new IntersectionObserver(entries => entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('in');
-    e.target.querySelectorAll('.count').forEach(countUp);
-    io.unobserve(e.target);
-  }), { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Soft spotlight that follows the cursor, and a reading-progress bar.
-  const bar = document.querySelector('.progress');
-  addEventListener('pointermove', e => {
-    document.body.style.setProperty('--x', e.clientX + 'px');
-    document.body.style.setProperty('--y', e.clientY + 'px');
-  }, { passive: true });
-  addEventListener('scroll', () => {
-    const max = root.scrollHeight - innerHeight;
-    bar.style.transform = 'scaleX(' + (max > 0 ? scrollY / max : 0) + ')';
-  }, { passive: true });
-})();
-</script>
 </body>
 </html>
