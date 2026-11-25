@@ -36,11 +36,11 @@ a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ink-3);
 a:hover{text-decoration-color:var(--ink)}
 img{max-width:100%}
 
-.page{max-width:680px;margin:0 auto;padding:clamp(48px,9vw,120px) 24px 64px}
+.page{max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,120px) 24px 64px}
 .intro{margin-bottom:clamp(64px,9vw,112px)}
 .name{font-size:21px;font-weight:500;letter-spacing:.01em;margin-bottom:12px}
-.intro p{color:var(--ink-2);max-width:520px}
-.intro .lede{color:var(--ink);font-size:21px;line-height:1.45;margin-bottom:12px}
+.intro p{color:var(--ink-2);max-width:620px}
+.intro .lede{color:var(--ink);font-size:clamp(21px,2.6vw,32px);letter-spacing:-.01em;line-height:1.45;margin-bottom:12px}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:28px;font-size:14px}
 .btn-primary{display:inline-block;background:var(--ink);color:var(--ground);text-decoration:none;font-weight:500;padding:8px 16px;border-radius:999px;transition:opacity .15s}
 .btn-primary:hover{opacity:.85}
@@ -59,6 +59,18 @@ img{max-width:100%}
 .Box-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
 .Box-row{padding:24px 0;border-top:1px solid var(--hair)}
 .Box-row:first-child{border-top:0;padding-top:0}
+/* Wide screens: project name, date, tags on the left; the story on the right. */
+@media (min-width:900px){
+  article.Box{display:grid;grid-template-columns:260px minmax(0,1fr);column-gap:56px;grid-template-rows:auto 1fr}
+  article.Box .Box-header{grid-column:1;grid-row:1;flex-direction:column;align-items:flex-start;gap:6px}
+  article.Box .Box-footer{grid-column:1;grid-row:2;align-content:flex-start;margin-top:12px}
+  article.Box .Box-body{grid-column:2;grid-row:1/3}
+  .Box-row{display:grid;grid-template-columns:260px minmax(0,1fr);column-gap:56px}
+  .Box-row>*{grid-column:2}
+  .Box-row>:first-child{grid-column:1;grid-row:1/5;align-self:start;flex-direction:column;gap:4px}
+  .TimelineItem{grid-template-columns:260px minmax(0,1fr);column-gap:56px}
+}
+.Box-body p,.Box-row p,.TimelineItem-body{max-width:72ch}
 
 .Label{display:inline-block;font-size:12px;line-height:1;padding:5px 9px;border-radius:999px;background:var(--pill);color:var(--ink-2);font-weight:500}
 .Label--secondary{background:none;padding:0;font-size:13px;color:var(--ink-3);font-weight:400}
@@ -77,8 +89,8 @@ img{max-width:100%}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
 @media (max-width:560px){.pair{grid-template-columns:1fr}}
 
-.chart{display:block;width:100%;max-width:520px;height:auto;overflow:visible}
-.chart.r2{max-width:420px}
+.chart{display:block;width:100%;max-width:640px;height:auto;overflow:visible}
+.chart.r2{max-width:520px}
 .chart .g{stroke:var(--hair);stroke-width:1}
 .chart .tk,.chart .xl,.chart .bl{font:11.5px var(--font);fill:var(--ink-2);font-variant-numeric:tabular-nums}
 .chart .bl{font-size:12.5px}
