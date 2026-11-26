@@ -11,23 +11,20 @@
 <meta property="og:url" content="https://abhijitkar10.github.io/portfolio/">
 <link rel="alternate" type="text/plain" href="llms.txt" title="Plain-text summary for language models">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230969da'/%3E%3Cpath d='M14 50 L26 34 L36 42 L50 16' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Look borrowed from searchbrowser.app: Inter, near-black ink at a few opacities, hairline borders, lots of air. */
+/* Type follows ChatGPT's chat: the system UI font (SF Pro on Apple), 16px on 28px lines, near-black text. */
 :root{
-  --ink:#171717;--ink-2:rgba(23,23,23,.5);--ink-3:rgba(23,23,23,.36);--hair:rgba(23,23,23,.09);
-  --ground:#fff;--pill:#ececec;--accent:#171717;--danger:#c2410c;
-  --font:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,sans-serif;
+  --ink:#0d0d0d;--ink-2:#5d5d5d;--ink-3:#8f8f8f;--hair:rgba(13,13,13,.1);
+  --ground:#fff;--pill:#f4f4f4;--accent:#0d0d0d;--danger:#c2410c;
+  --font:ui-sans-serif,-apple-system,system-ui,BlinkMacSystemFont,"Helvetica Neue",Helvetica,sans-serif;
 }
 /* Dark follows the system unless the visitor picks a theme with the switch. */
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ink:#ededed;--ink-2:rgba(237,237,237,.55);--ink-3:rgba(237,237,237,.38);--hair:rgba(237,237,237,.1);
-  --ground:#111;--pill:#222;--accent:#ededed;--danger:#fb923c;}}
+  --ink:#ececec;--ink-2:#b4b4b4;--ink-3:#8f8f8f;--hair:rgba(255,255,255,.1);
+  --ground:#212121;--pill:#303030;--accent:#ededed;--danger:#fb923c;}}
 :root[data-theme="dark"]{
-  --ink:#ededed;--ink-2:rgba(237,237,237,.55);--ink-3:rgba(237,237,237,.38);--hair:rgba(237,237,237,.1);
-  --ground:#111;--pill:#222;--accent:#ededed;--danger:#fb923c;}
+  --ink:#ececec;--ink-2:#b4b4b4;--ink-3:#8f8f8f;--hair:rgba(255,255,255,.1);
+  --ground:#212121;--pill:#303030;--accent:#ededed;--danger:#fb923c;}
 :root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}
 .theme{position:fixed;top:16px;right:16px;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--ground);color:var(--ink-2);cursor:pointer;transition:color .15s,border-color .15s}
 .theme:hover{color:var(--ink);border-color:var(--ink-3)}
@@ -41,7 +38,7 @@
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.6 var(--font);-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.75 var(--font);-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,ul,figure{margin:0}
 a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ink-3);text-underline-offset:3px;transition:text-decoration-color .15s}
 a:hover{text-decoration-color:var(--ink)}
@@ -49,7 +46,7 @@ img{max-width:100%}
 
 .page{max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,120px) 24px 64px}
 .intro{margin-bottom:clamp(64px,9vw,112px)}
-.name{font-size:21px;font-weight:500;letter-spacing:.01em;margin-bottom:12px}
+.name{font-size:21px;font-weight:600;margin-bottom:12px}
 .intro p{color:var(--ink-2);max-width:620px}
 .intro .lede{color:var(--ink);font-size:clamp(21px,2.6vw,32px);letter-spacing:-.01em;line-height:1.45;margin-bottom:12px}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:28px;font-size:14px}
@@ -65,7 +62,7 @@ img{max-width:100%}
 .Box:first-of-type{border-top:0}
 .Box-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:12px}
 .Box-title{font-size:16px;font-weight:600;flex:1 1 auto}
-.Box-body p{margin-bottom:12px}
+.Box-body p{margin-bottom:20px}
 .Box-body p.mb-0{margin-bottom:0}
 .Box-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
 .Box-row{padding:24px 0;border-top:1px solid var(--hair)}
